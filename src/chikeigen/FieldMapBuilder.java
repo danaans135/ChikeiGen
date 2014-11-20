@@ -20,19 +20,48 @@ public class FieldMapBuilder {
     public void execute() {
         // 初期フィールド
         initFieldMap();
+        int[][] baseField = initFieldMap2();
+        int[][] woodField = initFieldMap2();
 
-        // ランダム
-        double land = 0.5;
+        genField(baseField, 0.5, ToolModel.getInstance().getCount());
+        genField(woodField, 0.5, ToolModel.getInstance().getCount()/2);
         for (int i = 1; i < mHeight-1; i++) {
             for (int j = 1; j < mWidth-1; j++) {
-                mFieldMapArrs[j][i] = (Math.random() < land) ? 1 : 0;
+                if (baseField[j][i] == 1 && woodField[j][i] == 1) {
+                    baseField[j][i] = 2;
+                }
+//                mFieldMapArrs[j][i] = (Math.random() < land) ? 1 : 0;
+            }
+        }
+        mFieldMapArrs = baseField;
+//        // ランダム
+//        double land = 0.5;
+//        for (int i = 1; i < mHeight-1; i++) {
+//            for (int j = 1; j < mWidth-1; j++) {
+//                mFieldMapArrs[j][i] = (Math.random() < land) ? 1 : 0;
+//            }
+//        }
+//
+//        // 走査
+//        for (int i = 0; i < ToolModel.getInstance().getCount(); i++) {
+//            procFieldMap();
+//        }
+    }
+
+    private void genField(int[][] field, double land, int count) {
+        // ランダム
+//        double land = 0.5;
+        for (int i = 1; i < mHeight-1; i++) {
+            for (int j = 1; j < mWidth-1; j++) {
+                field[j][i] = (Math.random() < land) ? 1 : 0;
             }
         }
 
         // 走査
-        for (int i = 0; i < mWidth/2; i++) {
-            procFieldMap();
+        for (int i = 0; i < count; i++) {
+            procFieldMap2(field);
         }
+
     }
 
     private void procFieldMap() {
@@ -66,13 +95,49 @@ public class FieldMapBuilder {
         }
     }
 
-    private void initFieldMap() {
-        mFieldMapArrs = new int[mWidth][mHeight];
-        for (int i = 0; i < mHeight; i++) {
-            for (int j = 0; j < mWidth; j++) {
-                mFieldMapArrs[j][i] = 0;
+    private void procFieldMap2(int[][] field) {
+        for (int i = 1; i < mHeight-1; i++) {
+            for (int j = 1; j < mWidth-1; j++) {
+                int count = 0;
+                count += field[j-1][i-1];
+                count += field[j+0][i-1];
+                count += field[j+1][i-1];
+                count += field[j-1][i+0];
+//                count += field[j+0][i+0];
+                count += field[j+1][i+0];
+                count += field[j-1][i+1];
+                count += field[j+0][i+1];
+                count += field[j+1][i+1];
+
+                switch (count) {
+                case 0: field[j][i] = 0; break;
+                case 1: field[j][i] = (Math.random() < 0.1) ? 1 : 0; break;
+                case 2: field[j][i] = (Math.random() < 0.2) ? 1 : 0; break;
+                case 3: field[j][i] = (Math.random() < 0.3) ? 1 : 0; break;
+                case 4: field[j][i] = (Math.random() < 0.5) ? 1 : 0; break;
+                case 5: field[j][i] = (Math.random() < 0.7) ? 1 : 0; break;
+                case 6: field[j][i] = (Math.random() < 0.8) ? 1 : 0; break;
+                case 7: field[j][i] = (Math.random() < 0.9) ? 1 : 0; break;
+                case 8: field[j][i] = 1; break;
+                default:
+                    break;
+                }
             }
         }
+    }
+
+    private void initFieldMap() {
+        mFieldMapArrs = initFieldMap2();
+    }
+
+    private int[][] initFieldMap2() {
+        int[][] ret = new int[mWidth][mHeight];
+        for (int i = 0; i < mHeight; i++) {
+            for (int j = 0; j < mWidth; j++) {
+                ret[j][i] = 0;
+            }
+        }
+        return ret;
     }
 
     public void printFieldMap() {
@@ -95,12 +160,9 @@ public class FieldMapBuilder {
             for (int j = 0; j < mWidth; j++) {
                 Color c = Color.black;
                 switch (mFieldMapArrs[j][i]) {
-                case 0:
-                    c = Color.decode("#a0a0a0");
-                    break;
-                case 1:
-                    c = Color.white;
-                    break;
+                case 0: c = Color.decode("#9090f0"); break;
+                case 1: c = Color.decode("#d0ffd0"); break;
+                case 2: c = Color.decode("#90f090"); break;
                 default:
                     break;
                 }

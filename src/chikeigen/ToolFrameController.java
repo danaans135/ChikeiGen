@@ -1,14 +1,14 @@
 package chikeigen;
 
-import java.awt.image.BufferedImage;
-
-import javafx.embed.swing.SwingFXUtils;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
+import javafx.util.converter.NumberStringConverter;
 
 public class ToolFrameController {
 
@@ -22,17 +22,22 @@ public class ToolFrameController {
     private Slider alphaSlider;
 
     @FXML
+    private TextField countTextField;
+
+    @FXML
     void initialize() {
         genButton.setOnAction(ev -> onActionGenButton(ev));
-//        alphaSlider.valueProperty().bind(imageView.opacityProperty());
-        imageView.opacityProperty().bind(alphaSlider.valueProperty());
+
+        ToolModel toolModel = ToolModel.getInstance();
+        Bindings.bindBidirectional(alphaSlider.valueProperty(), toolModel.fieldMapOpacityProperty());
+        imageView.opacityProperty().bind(toolModel.fieldMapOpacityProperty());
+        Bindings.bindBidirectional(countTextField.textProperty(), toolModel.countProperty(),
+                new NumberStringConverter());
     }
 
     private void onActionGenButton(ActionEvent ev) {
-        System.out.println("hi");
         ToolModel.getInstance().generateFieldMap();
-        BufferedImage img = ToolModel.getInstance().getFieldMapImage();
-        WritableImage fxImage = SwingFXUtils.toFXImage(img, null);
+        Image fxImage = ToolModel.getInstance().getFieldMapImage();
         imageView.setImage(fxImage);
         imageView.setFitWidth(fxImage.getWidth());
         imageView.setFitHeight(fxImage.getHeight());
