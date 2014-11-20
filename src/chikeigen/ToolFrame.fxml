@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="428.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chikeigen.ToolFrameController">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="204.0" fitWidth="214.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" smooth="false" />
+      <Button fx:id="genButton" layoutX="245.0" layoutY="14.0" mnemonicParsing="false" text="Button" />
+      <Slider fx:id="alphaSlider" layoutX="245.0" layoutY="51.0" max="1.0" prefHeight="14.0" prefWidth="160.0" />
+   </children>
+</AnchorPane>
