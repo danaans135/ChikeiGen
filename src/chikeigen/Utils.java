@@ -2,15 +2,13 @@ package chikeigen;
 
 public class Utils {
     public static void main(String[] args) {
-        String prop = "count";
-//        String propType = "IntegerProperty";
-        String propType = "SimpleIntegerProperty";
-        String jtype = "int";
-
-        outProp(prop, propType, jtype);
+        outProp("count", "SimpleIntegerProperty", "int");
         outProp("title", "SimpleStringProperty", "String");
         outProp("fieldMapOpacity", "SimpleDoubleProperty", "double");
-
+        outProp("fieldWidth", "SimpleIntegerProperty", "int");
+        outProp("fieldHeight", "SimpleIntegerProperty", "int");
+        outProp("baseRate", "SimpleDoubleProperty", "double");
+        outProp("woodRate", "SimpleDoubleProperty", "double");
     }
 
     private static void outProp(String prop, String propType, String jtype) {

@@ -16,13 +16,25 @@ public class ToolFrameController {
     private Button genButton;
 
     @FXML
-    private ImageView imageView;
-
-    @FXML
-    private Slider alphaSlider;
+    private TextField woodRateTextField;
 
     @FXML
     private TextField countTextField;
+
+    @FXML
+    private TextField fieldWidthTextField;
+
+    @FXML
+    private TextField baseRateTextField;
+
+    @FXML
+    private ImageView imageView;
+
+    @FXML
+    private TextField fieldHeightTextField;
+
+    @FXML
+    private Slider alphaSlider;
 
     @FXML
     void initialize() {
@@ -32,6 +44,14 @@ public class ToolFrameController {
         Bindings.bindBidirectional(alphaSlider.valueProperty(), toolModel.fieldMapOpacityProperty());
         imageView.opacityProperty().bind(toolModel.fieldMapOpacityProperty());
         Bindings.bindBidirectional(countTextField.textProperty(), toolModel.countProperty(),
+                new NumberStringConverter());
+        Bindings.bindBidirectional(fieldWidthTextField.textProperty(), toolModel.fieldWidthProperty(),
+                new NumberStringConverter());
+        Bindings.bindBidirectional(fieldHeightTextField.textProperty(), toolModel.fieldHeightProperty(),
+                new NumberStringConverter());
+        Bindings.bindBidirectional(baseRateTextField.textProperty(), toolModel.baseRateProperty(),
+                new NumberStringConverter());
+        Bindings.bindBidirectional(woodRateTextField.textProperty(), toolModel.woodRateProperty(),
                 new NumberStringConverter());
     }
 

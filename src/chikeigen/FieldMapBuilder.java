@@ -23,8 +23,8 @@ public class FieldMapBuilder {
         int[][] baseField = initFieldMap2();
         int[][] woodField = initFieldMap2();
 
-        genField(baseField, 0.5, ToolModel.getInstance().getCount());
-        genField(woodField, 0.5, ToolModel.getInstance().getCount()/2);
+        genField(baseField, ToolModel.getInstance().getBaseRate(), ToolModel.getInstance().getCount());
+        genField(woodField, ToolModel.getInstance().getWoodRate(), ToolModel.getInstance().getCount());
         for (int i = 1; i < mHeight-1; i++) {
             for (int j = 1; j < mWidth-1; j++) {
                 if (baseField[j][i] == 1 && woodField[j][i] == 1) {
@@ -64,36 +64,36 @@ public class FieldMapBuilder {
 
     }
 
-    private void procFieldMap() {
-        for (int i = 1; i < mHeight-1; i++) {
-            for (int j = 1; j < mWidth-1; j++) {
-                int count = 0;
-                count += mFieldMapArrs[j-1][i-1];
-                count += mFieldMapArrs[j+0][i-1];
-                count += mFieldMapArrs[j+1][i-1];
-                count += mFieldMapArrs[j-1][i+0];
-//                count += mFieldMapArrs[j+0][i+0];
-                count += mFieldMapArrs[j+1][i+0];
-                count += mFieldMapArrs[j-1][i+1];
-                count += mFieldMapArrs[j+0][i+1];
-                count += mFieldMapArrs[j+1][i+1];
-
-                switch (count) {
-                case 0: mFieldMapArrs[j][i] = 0; break;
-                case 1: mFieldMapArrs[j][i] = (Math.random() < 0.1) ? 1 : 0; break;
-                case 2: mFieldMapArrs[j][i] = (Math.random() < 0.2) ? 1 : 0; break;
-                case 3: mFieldMapArrs[j][i] = (Math.random() < 0.3) ? 1 : 0; break;
-                case 4: mFieldMapArrs[j][i] = (Math.random() < 0.5) ? 1 : 0; break;
-                case 5: mFieldMapArrs[j][i] = (Math.random() < 0.7) ? 1 : 0; break;
-                case 6: mFieldMapArrs[j][i] = (Math.random() < 0.8) ? 1 : 0; break;
-                case 7: mFieldMapArrs[j][i] = (Math.random() < 0.9) ? 1 : 0; break;
-                case 8: mFieldMapArrs[j][i] = 1; break;
-                default:
-                    break;
-                }
-            }
-        }
-    }
+//    private void procFieldMap() {
+//        for (int i = 1; i < mHeight-1; i++) {
+//            for (int j = 1; j < mWidth-1; j++) {
+//                int count = 0;
+//                count += mFieldMapArrs[j-1][i-1];
+//                count += mFieldMapArrs[j+0][i-1];
+//                count += mFieldMapArrs[j+1][i-1];
+//                count += mFieldMapArrs[j-1][i+0];
+////                count += mFieldMapArrs[j+0][i+0];
+//                count += mFieldMapArrs[j+1][i+0];
+//                count += mFieldMapArrs[j-1][i+1];
+//                count += mFieldMapArrs[j+0][i+1];
+//                count += mFieldMapArrs[j+1][i+1];
+//
+//                switch (count) {
+//                case 0: mFieldMapArrs[j][i] = 0; break;
+//                case 1: mFieldMapArrs[j][i] = (Math.random() < 0.1) ? 1 : 0; break;
+//                case 2: mFieldMapArrs[j][i] = (Math.random() < 0.2) ? 1 : 0; break;
+//                case 3: mFieldMapArrs[j][i] = (Math.random() < 0.3) ? 1 : 0; break;
+//                case 4: mFieldMapArrs[j][i] = (Math.random() < 0.5) ? 1 : 0; break;
+//                case 5: mFieldMapArrs[j][i] = (Math.random() < 0.7) ? 1 : 0; break;
+//                case 6: mFieldMapArrs[j][i] = (Math.random() < 0.8) ? 1 : 0; break;
+//                case 7: mFieldMapArrs[j][i] = (Math.random() < 0.9) ? 1 : 0; break;
+//                case 8: mFieldMapArrs[j][i] = 1; break;
+//                default:
+//                    break;
+//                }
+//            }
+//        }
+//    }
 
     private void procFieldMap2(int[][] field) {
         for (int i = 1; i < mHeight-1; i++) {

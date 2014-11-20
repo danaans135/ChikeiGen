@@ -12,6 +12,16 @@ import javafx.scene.image.WritableImage;
 public class ToolModel {
     private static final String TITLE = "ChikeiGen";
 
+    private static final int DEFAULT_FIELD_WIDTH = 256;
+
+    private static final int DEFAULT_FIELD_HEIGHT = 256;
+
+    private static final int DEFAULT_COUNT = 128;
+
+    private static final double DEFAULT_BASE_RATE = 0.5;
+
+    private static final double DEFAULT_WOOD_RATE = 0.5;
+
     private static ToolModel sInatance = new ToolModel();
     private FieldMapBuilder mBuilder;
 
@@ -34,14 +44,39 @@ public class ToolModel {
     public double getFieldMapOpacity() { return fieldMapOpacity.getValue(); }
     public void setFieldMapOpacity(double fieldMapOpacity) { this.fieldMapOpacity.setValue(fieldMapOpacity); }
 
+    private SimpleIntegerProperty fieldWidth = new SimpleIntegerProperty();
+    public SimpleIntegerProperty fieldWidthProperty() { return fieldWidth; }
+    public int getFieldWidth() { return fieldWidth.getValue(); }
+    public void setFieldWidth(int fieldWidth) { this.fieldWidth.setValue(fieldWidth); }
+
+    private SimpleIntegerProperty fieldHeight = new SimpleIntegerProperty();
+    public SimpleIntegerProperty fieldHeightProperty() { return fieldHeight; }
+    public int getFieldHeight() { return fieldHeight.getValue(); }
+    public void setFieldHeight(int fieldHeight) { this.fieldHeight.setValue(fieldHeight); }
+
+    private SimpleDoubleProperty baseRate = new SimpleDoubleProperty();
+    public SimpleDoubleProperty baseRateProperty() { return baseRate; }
+    public double getBaseRate() { return baseRate.getValue(); }
+    public void setBaseRate(double baseRate) { this.baseRate.setValue(baseRate); }
+
+    private SimpleDoubleProperty woodRate = new SimpleDoubleProperty();
+    public SimpleDoubleProperty woodRateProperty() { return woodRate; }
+    public double getWoodRate() { return woodRate.getValue(); }
+    public void setWoodRate(double woodRate) { this.woodRate.setValue(woodRate); }
+
     private ToolModel() {
         mBuilder = new FieldMapBuilder();
         setTitle(TITLE);
+        setCount(DEFAULT_COUNT);
         setFieldMapOpacity(1.0);
+        setFieldWidth(DEFAULT_FIELD_WIDTH);
+        setFieldHeight(DEFAULT_FIELD_HEIGHT);
+        setBaseRate(DEFAULT_BASE_RATE);
+        setWoodRate(DEFAULT_WOOD_RATE);
     }
 
     public void generateFieldMap() {
-        mBuilder.setFieldSize(512, 512);
+        mBuilder.setFieldSize(getFieldWidth(), getFieldHeight());
         mBuilder.execute();
 //        mBuilder.printFieldMap();
     }

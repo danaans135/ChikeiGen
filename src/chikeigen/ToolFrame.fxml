@@ -15,13 +15,17 @@
    <children>
       <VBox layoutX="245.0" layoutY="16.0" prefHeight="241.0" prefWidth="171.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="16.0">
          <children>
-            <Button fx:id="genButton" mnemonicParsing="false" text="Button" />
+            <Button fx:id="genButton" mnemonicParsing="false" text="生成" />
             <Slider fx:id="alphaSlider" max="1.0" prefHeight="14.0" prefWidth="160.0">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Slider>
-            <TextField fx:id="countTextField" />
+            <TextField fx:id="countTextField" promptText="シャッフル回数" />
+            <TextField fx:id="fieldWidthTextField" promptText="幅" />
+            <TextField fx:id="fieldHeightTextField" promptText="高さ" />
+            <TextField fx:id="baseRateTextField" promptText="地率(0.0-1.0)" />
+            <TextField fx:id="woodRateTextField" promptText="森率(0-1.0)" />
          </children>
       </VBox>
       <ScrollPane layoutX="14.0" layoutY="14.0" prefViewportHeight="204.0" prefViewportWidth="214.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="198.0" AnchorPane.topAnchor="14.0">
