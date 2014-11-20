@@ -12,8 +12,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="428.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chikeigen.ToolFrameController">
    <children>
-      <ImageView fx:id="imageView" fitHeight="204.0" fitWidth="214.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" smooth="false" />
-      <Button fx:id="genButton" layoutX="245.0" layoutY="14.0" mnemonicParsing="false" text="Button" />
-      <Slider fx:id="alphaSlider" layoutX="245.0" layoutY="51.0" max="1.0" prefHeight="14.0" prefWidth="160.0" />
+      <VBox layoutX="245.0" layoutY="16.0" prefHeight="241.0" prefWidth="171.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="16.0">
+         <children>
+            <Button fx:id="genButton" mnemonicParsing="false" text="Button" />
+            <Slider fx:id="alphaSlider" max="1.0" prefHeight="14.0" prefWidth="160.0" />
+         </children>
+      </VBox>
+      <ScrollPane layoutX="14.0" layoutY="14.0" prefViewportHeight="204.0" prefViewportWidth="214.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="198.0" AnchorPane.topAnchor="14.0">
+         <content>
+            <ImageView fx:id="imageView" fitHeight="204.0" fitWidth="214.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" smooth="false" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

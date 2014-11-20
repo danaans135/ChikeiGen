@@ -15,7 +15,7 @@ public class ToolModel {
     }
 
     public void generateFieldMap() {
-        mBuilder.setFieldSize(128, 128);
+        mBuilder.setFieldSize(256, 256);
         mBuilder.execute();
         mBuilder.printFieldMap();
     }
