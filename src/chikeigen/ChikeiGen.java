@@ -15,14 +15,6 @@ public class ChikeiGen extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-//        FieldMapBuilder builder = new FieldMapBuilder();
-//        builder.setFieldSize(64, 64);
-//        builder.execute();
-//        builder.printFieldMap();
-//        BufferedImage img = builder.getFieldMapImage();
-//
-//        ImageIO.write(img, "png", new File("aa.png"));
-
         Parent root = FXMLLoader.load(getClass().getResource("ToolFrame.fxml"));
         stage.setScene(new Scene(root));
         stage.setTitle(ToolModel.getInstance().getTitle());

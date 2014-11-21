@@ -9,6 +9,7 @@ public class Utils {
         outProp("fieldHeight", "SimpleIntegerProperty", "int");
         outProp("baseRate", "SimpleDoubleProperty", "double");
         outProp("woodRate", "SimpleDoubleProperty", "double");
+        outProp("chipSize", "SimpleIntegerProperty", "int");
     }
 
     private static void outProp(String prop, String propType, String jtype) {

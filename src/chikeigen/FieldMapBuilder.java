@@ -23,29 +23,19 @@ public class FieldMapBuilder {
         int[][] baseField = initFieldMap2();
         int[][] woodField = initFieldMap2();
 
+        // フィールド生成
         genField(baseField, ToolModel.getInstance().getBaseRate(), ToolModel.getInstance().getCount());
         genField(woodField, ToolModel.getInstance().getWoodRate(), ToolModel.getInstance().getCount());
+
+        //フィールド合成　平地、森
         for (int i = 1; i < mHeight-1; i++) {
             for (int j = 1; j < mWidth-1; j++) {
                 if (baseField[j][i] == 1 && woodField[j][i] == 1) {
                     baseField[j][i] = 2;
                 }
-//                mFieldMapArrs[j][i] = (Math.random() < land) ? 1 : 0;
             }
         }
         mFieldMapArrs = baseField;
-//        // ランダム
-//        double land = 0.5;
-//        for (int i = 1; i < mHeight-1; i++) {
-//            for (int j = 1; j < mWidth-1; j++) {
-//                mFieldMapArrs[j][i] = (Math.random() < land) ? 1 : 0;
-//            }
-//        }
-//
-//        // 走査
-//        for (int i = 0; i < ToolModel.getInstance().getCount(); i++) {
-//            procFieldMap();
-//        }
     }
 
     private void genField(int[][] field, double land, int count) {
@@ -60,6 +50,23 @@ public class FieldMapBuilder {
         // 走査
         for (int i = 0; i < count; i++) {
             procFieldMap2(field);
+        }
+
+        // 整理
+        for (int i = 1; i < mHeight-1; i++) {
+            for (int j = 1; j < mWidth-1; j++) {
+                // 周辺4マスが不在の場合、除去
+                int round = 0;
+                round += field[j+0][i-1];
+                round += field[j-1][i+0];
+                round += field[j+1][i+0];
+                round += field[j+0][i+1];
+                if (round == 0) {
+                    field[j][i] = 0;
+                } else if (round == 4) {
+                    field[j][i] = 1;
+                }
+            }
         }
 
     }
@@ -168,6 +175,28 @@ public class FieldMapBuilder {
                 }
                 g2.setPaint(c);
                 g2.drawRect(j, i, 1, 1);
+            }
+        }
+
+        return img;
+    }
+
+    public BufferedImage getFieldMapImage2(int chipSize) {
+        BufferedImage img = new BufferedImage(mWidth * chipSize, mHeight * chipSize, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = img.createGraphics();
+
+        for (int i = 0; i < mHeight; i++) {
+            for (int j = 0; j < mWidth; j++) {
+                Color c = Color.black;
+                switch (mFieldMapArrs[j][i]) {
+                case 0: c = Color.decode("#9090f0"); break;
+                case 1: c = Color.decode("#d0ffd0"); break;
+                case 2: c = Color.decode("#90f090"); break;
+                default:
+                    break;
+                }
+                g2.setPaint(c);
+                g2.fillRect(j * chipSize, i * chipSize, chipSize, chipSize);
             }
         }
 

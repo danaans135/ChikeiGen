@@ -34,12 +34,17 @@ public class ToolFrameController {
     private TextField fieldHeightTextField;
 
     @FXML
+    private TextField chipSizeTextField;
+
+    @FXML
     private Slider alphaSlider;
 
     @FXML
     void initialize() {
+        // イベント定義
         genButton.setOnAction(ev -> onActionGenButton(ev));
 
+        // UIとモデルをバインド
         ToolModel toolModel = ToolModel.getInstance();
         Bindings.bindBidirectional(alphaSlider.valueProperty(), toolModel.fieldMapOpacityProperty());
         imageView.opacityProperty().bind(toolModel.fieldMapOpacityProperty());
@@ -53,9 +58,18 @@ public class ToolFrameController {
                 new NumberStringConverter());
         Bindings.bindBidirectional(woodRateTextField.textProperty(), toolModel.woodRateProperty(),
                 new NumberStringConverter());
+        Bindings.bindBidirectional(chipSizeTextField.textProperty(), toolModel.chipSizeProperty(),
+                new NumberStringConverter());
+
+        // 地図生成
+        genFieldMap();
     }
 
     private void onActionGenButton(ActionEvent ev) {
+        genFieldMap();
+    }
+
+    private void genFieldMap() {
         ToolModel.getInstance().generateFieldMap();
         Image fxImage = ToolModel.getInstance().getFieldMapImage();
         imageView.setImage(fxImage);

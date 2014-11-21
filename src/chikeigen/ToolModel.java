@@ -22,6 +22,8 @@ public class ToolModel {
 
     private static final double DEFAULT_WOOD_RATE = 0.5;
 
+    private static final int DEFAULT_CHIP_SIZE = 1;
+
     private static ToolModel sInatance = new ToolModel();
     private FieldMapBuilder mBuilder;
 
@@ -64,6 +66,11 @@ public class ToolModel {
     public double getWoodRate() { return woodRate.getValue(); }
     public void setWoodRate(double woodRate) { this.woodRate.setValue(woodRate); }
 
+    private SimpleIntegerProperty chipSize = new SimpleIntegerProperty();
+    public SimpleIntegerProperty chipSizeProperty() { return chipSize; }
+    public int getChipSize() { return chipSize.getValue(); }
+    public void setChipSize(int chipSize) { this.chipSize.setValue(chipSize); }
+
     private ToolModel() {
         mBuilder = new FieldMapBuilder();
         setTitle(TITLE);
@@ -73,6 +80,7 @@ public class ToolModel {
         setFieldHeight(DEFAULT_FIELD_HEIGHT);
         setBaseRate(DEFAULT_BASE_RATE);
         setWoodRate(DEFAULT_WOOD_RATE);
+        setChipSize(DEFAULT_CHIP_SIZE);
     }
 
     public void generateFieldMap() {
@@ -82,7 +90,7 @@ public class ToolModel {
     }
 
     public Image getFieldMapImage() {
-        BufferedImage img = mBuilder.getFieldMapImage();
+        BufferedImage img = mBuilder.getFieldMapImage2(getChipSize());
 //        BufferedImage img = ToolModel.getInstance().getFieldMapImage();
         WritableImage fxImage = SwingFXUtils.toFXImage(img, null);
         return fxImage;
