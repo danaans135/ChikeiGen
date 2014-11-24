@@ -24,6 +24,8 @@ public class ToolModel {
 
     private static final int DEFAULT_CHIP_SIZE = 1;
 
+    private static final int DEFAULT_SHUFFLE_COUNT = 128;
+
     private static ToolModel sInatance = new ToolModel();
     private FieldMapBuilder mBuilder;
 
@@ -71,6 +73,21 @@ public class ToolModel {
     public int getChipSize() { return chipSize.getValue(); }
     public void setChipSize(int chipSize) { this.chipSize.setValue(chipSize); }
 
+    private SimpleIntegerProperty baseShuffleCount = new SimpleIntegerProperty();
+    public SimpleIntegerProperty baseShuffleCountProperty() { return baseShuffleCount; }
+    public int getBaseShuffleCount() { return baseShuffleCount.getValue(); }
+    public void setBaseShuffleCount(int baseShuffleCount) { this.baseShuffleCount.setValue(baseShuffleCount); }
+
+    private SimpleIntegerProperty woodShuffleCount = new SimpleIntegerProperty();
+    public SimpleIntegerProperty woodShuffleCountProperty() { return woodShuffleCount; }
+    public int getWoodShuffleCount() { return woodShuffleCount.getValue(); }
+    public void setWoodShuffleCount(int woodShuffleCount) { this.woodShuffleCount.setValue(woodShuffleCount); }
+
+    private SimpleIntegerProperty mountShuffleCount = new SimpleIntegerProperty();
+    public SimpleIntegerProperty mountShuffleCountProperty() { return mountShuffleCount; }
+    public int getMountShuffleCount() { return mountShuffleCount.getValue(); }
+    public void setMountShuffleCount(int mountShuffleCount) { this.mountShuffleCount.setValue(mountShuffleCount); }
+
     private ToolModel() {
         mBuilder = new FieldMapBuilder();
         setTitle(TITLE);
@@ -81,10 +98,30 @@ public class ToolModel {
         setBaseRate(DEFAULT_BASE_RATE);
         setWoodRate(DEFAULT_WOOD_RATE);
         setChipSize(DEFAULT_CHIP_SIZE);
+        setBaseShuffleCount(DEFAULT_SHUFFLE_COUNT);
+        setWoodShuffleCount(DEFAULT_SHUFFLE_COUNT);
+        setMountShuffleCount(DEFAULT_SHUFFLE_COUNT);
+    }
+
+    public void executeBase() {
+        mBuilder.setFieldSize(getFieldWidth(), getFieldHeight());
+        mBuilder.setBaseShuffleCount(getBaseShuffleCount());
+        mBuilder.executeBase();
+//        mBuilder.printFieldMap();
+    }
+
+    public void executeWood() {
+//        mBuilder.setFieldSize(getFieldWidth(), getFieldHeight());
+        mBuilder.setWoodShuffleCount(getWoodShuffleCount());
+        mBuilder.executeWood();
+//        mBuilder.printFieldMap();
     }
 
     public void generateFieldMap() {
         mBuilder.setFieldSize(getFieldWidth(), getFieldHeight());
+        mBuilder.setBaseShuffleCount(getBaseShuffleCount());
+        mBuilder.setWoodShuffleCount(getWoodShuffleCount());
+        mBuilder.setMountShuffleCount(getMountShuffleCount());
         mBuilder.execute();
 //        mBuilder.printFieldMap();
     }

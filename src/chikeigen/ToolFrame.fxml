@@ -11,30 +11,86 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="428.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chikeigen.ToolFrameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="443.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chikeigen.ToolFrameController">
    <children>
-      <VBox layoutX="245.0" layoutY="16.0" prefHeight="241.0" prefWidth="171.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="16.0">
-         <children>
-            <Button fx:id="genButton" mnemonicParsing="false" text="生成" />
-            <TextField fx:id="countTextField" promptText="シャッフル回数" />
-            <TextField fx:id="fieldWidthTextField" promptText="幅" />
-            <TextField fx:id="fieldHeightTextField" promptText="高さ" />
-            <TextField fx:id="baseRateTextField" promptText="地率(0.0-1.0)" />
-            <TextField fx:id="woodRateTextField" promptText="森率(0-1.0)" />
-            <Label text="チップのサイズ">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
-            <TextField fx:id="chipSizeTextField" />
-            <Slider fx:id="alphaSlider" max="1.0" prefHeight="14.0" prefWidth="160.0">
-               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </VBox.margin>
-            </Slider>
-         </children>
-      </VBox>
-      <ScrollPane layoutX="14.0" layoutY="14.0" prefViewportHeight="204.0" prefViewportWidth="214.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="198.0" AnchorPane.topAnchor="14.0">
+      <ScrollPane layoutX="242.0" layoutY="16.0" prefHeight="241.0" prefViewportHeight="288.0" prefViewportWidth="174.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="16.0">
+         <content>
+            <VBox layoutX="245.0" layoutY="16.0" prefHeight="241.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="16.0">
+               <children>
+                  <Button fx:id="genButton" mnemonicParsing="false" text="生成" />
+                  <HBox>
+                     <children>
+                        <Button fx:id="executeBaseButton" mnemonicParsing="false" text="陸地" />
+                        <Button fx:id="executeWoodButton" mnemonicParsing="false" text="森林" />
+                     </children>
+                  </HBox>
+                  <Label text="シャッフル回数">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="countTextField" promptText="シャッフル回数" />
+                  <Label text="幅">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="fieldWidthTextField" promptText="幅" />
+                  <Label text="高さ">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="fieldHeightTextField" promptText="高さ" />
+                  <Label text="陸地率">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="baseRateTextField" promptText="地率(0.0-1.0)" />
+                  <Label text="森林率">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="woodRateTextField" promptText="森率(0-1.0)" />
+                  <Label text="チップのサイズ">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="chipSizeTextField" />
+                  <Slider fx:id="alphaSlider" max="1.0" prefHeight="14.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Label text="陸地シャッフル回数">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="baseShuffleCountTextField" promptText="シャッフル回数" />
+                  <Label text="森林シャッフル回数">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="woodShuffleCountTextField" promptText="シャッフル回数" />
+                  <Label text="山地シャッフル回数">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="mountShuffleCountTextField" promptText="シャッフル回数" />
+               </children>
+            </VBox>
+         </content>
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
+      </ScrollPane>
+      <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="241.0" prefViewportHeight="204.0" prefViewportWidth="214.0" prefWidth="229.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="14.0">
          <content>
             <ImageView fx:id="imageView" fitHeight="204.0" fitWidth="214.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" smooth="false" />
          </content>
