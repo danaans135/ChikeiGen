@@ -22,6 +22,8 @@
                      <children>
                         <Button fx:id="executeBaseButton" mnemonicParsing="false" text="陸地" />
                         <Button fx:id="executeWoodButton" mnemonicParsing="false" text="森林" />
+                        <Button fx:id="executeDesertButton" mnemonicParsing="false" text="砂漠" />
+                        <Button fx:id="executeMountButton" mnemonicParsing="false" text="山地" />
                      </children>
                   </HBox>
                   <Label text="シャッフル回数">
@@ -77,6 +79,12 @@
                      </font>
                   </Label>
                   <TextField fx:id="woodShuffleCountTextField" promptText="シャッフル回数" />
+                  <Label text="砂漠シャッフル回数">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="desertShuffleCountTextField" promptText="シャッフル回数" />
                   <Label text="山地シャッフル回数">
                      <font>
                         <Font size="10.0" />

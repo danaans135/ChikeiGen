@@ -27,6 +27,7 @@ public class CodingAssistUtil {
         outProp("chipSize", "int");
         outProp("baseShuffleCount", "int");
         outProp("woodShuffleCount", "int");
+        outProp("desertShuffleCount", "int");
         outProp("mountShuffleCount", "int");
 
 //        System.out.println("----------------------");

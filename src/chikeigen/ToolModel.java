@@ -83,6 +83,11 @@ public class ToolModel {
     public int getWoodShuffleCount() { return woodShuffleCount.getValue(); }
     public void setWoodShuffleCount(int woodShuffleCount) { this.woodShuffleCount.setValue(woodShuffleCount); }
 
+    private SimpleIntegerProperty desertShuffleCount = new SimpleIntegerProperty();
+    public SimpleIntegerProperty desertShuffleCountProperty() { return desertShuffleCount; }
+    public int getDesertShuffleCount() { return desertShuffleCount.getValue(); }
+    public void setDesertShuffleCount(int desertShuffleCount) { this.desertShuffleCount.setValue(desertShuffleCount); }
+
     private SimpleIntegerProperty mountShuffleCount = new SimpleIntegerProperty();
     public SimpleIntegerProperty mountShuffleCountProperty() { return mountShuffleCount; }
     public int getMountShuffleCount() { return mountShuffleCount.getValue(); }
@@ -100,6 +105,7 @@ public class ToolModel {
         setChipSize(DEFAULT_CHIP_SIZE);
         setBaseShuffleCount(DEFAULT_SHUFFLE_COUNT);
         setWoodShuffleCount(DEFAULT_SHUFFLE_COUNT);
+        setDesertShuffleCount(DEFAULT_SHUFFLE_COUNT);
         setMountShuffleCount(DEFAULT_SHUFFLE_COUNT);
     }
 
@@ -111,10 +117,18 @@ public class ToolModel {
     }
 
     public void executeWood() {
-//        mBuilder.setFieldSize(getFieldWidth(), getFieldHeight());
         mBuilder.setWoodShuffleCount(getWoodShuffleCount());
         mBuilder.executeWood();
-//        mBuilder.printFieldMap();
+    }
+
+    public void executeDesert() {
+        mBuilder.setDesertShuffleCount(getDesertShuffleCount());
+        mBuilder.executeDesert();
+    }
+
+    public void executeMount() {
+        mBuilder.setMountShuffleCount(getMountShuffleCount());
+        mBuilder.executeMount();
     }
 
     public void generateFieldMap() {

@@ -13,9 +13,12 @@ public class FieldMapBuilder {
     private int mHeight = DEFAULT_HEIGHT;
     private int baseShuffleCount = 100;
     private int woodShuffleCount = 100;
+    private int desertShuffleCount = 100;
     private int mountShuffleCount = 100;
     private int[][] baseField;
     private int[][] woodField;
+    private int[][] desertField;
+    private int[][] mountField;
 
     public void setFieldSize(int width, int height) {
         mWidth = width;
@@ -25,6 +28,10 @@ public class FieldMapBuilder {
     public void executeBase() {
         mFieldMapArrs = initFieldMap2();
         baseField = initFieldMap2();
+        woodField = initFieldMap2();
+        desertField = initFieldMap2();
+        mountField = initFieldMap2();
+
         // フィールド生成
         ToolModel model = ToolModel.getInstance();
         genField(baseField, model.getBaseRate(), baseShuffleCount);
@@ -40,49 +47,88 @@ public class FieldMapBuilder {
     }
 
     public void executeWood() {
-//        mFieldMapArrs = initFieldMap2();
         woodField = initFieldMap2();
+
         // フィールド生成
         ToolModel model = ToolModel.getInstance();
-//        genField(baseField, model.getBaseRate(), baseShuffleCount);
         genField(woodField, model.getWoodRate(), woodShuffleCount, false);
 
-        //フィールド
-        for (int i = 1; i < mHeight-1; i++) {
-            for (int j = 1; j < mWidth-1; j++) {
-                if (baseField[j][i] == 1) {
-                    mFieldMapArrs[j][i] = 1;
-                }
-            }
-        }
-
-        //フィールド合成　平地、森
-        for (int i = 1; i < mHeight-1; i++) {
-            for (int j = 1; j < mWidth-1; j++) {
-                if (baseField[j][i] == 1 && woodField[j][i] == 1) {
-                    mFieldMapArrs[j][i] = 2;
-                }
-            }
-        }
+        composeFieldMap();
+//        //フィールド
+//        for (int i = 1; i < mHeight-1; i++) {
+//            for (int j = 1; j < mWidth-1; j++) {
+//                if (baseField[j][i] == 1) {
+//                    mFieldMapArrs[j][i] = 1;
+//                }
+//            }
+//        }
+//
+//        //フィールド合成　平地、森
+//        for (int i = 1; i < mHeight-1; i++) {
+//            for (int j = 1; j < mWidth-1; j++) {
+//                if (baseField[j][i] == 1 && woodField[j][i] == 1) {
+//                    mFieldMapArrs[j][i] = 2;
+//                }
+//            }
+//        }
+//
+//        //フィールド合成　平地、砂地
+//        for (int i = 1; i < mHeight-1; i++) {
+//            for (int j = 1; j < mWidth-1; j++) {
+//                if (baseField[j][i] == 1 && desertField[j][i] == 1) {
+//                    mFieldMapArrs[j][i] = 4;
+//                }
+//            }
+//        }
     }
 
-    public void execute() {
-        // 初期フィールド
-//        initFieldMap();
-        mFieldMapArrs = initFieldMap2();
-        int[][] baseField = initFieldMap2();
-        int[][] woodField = initFieldMap2();
-        int[][] mountField = initFieldMap2();
-        int[][] desertField = initFieldMap2();
-
+    public void executeDesert() {
+        desertField = initFieldMap2();
         // フィールド生成
         ToolModel model = ToolModel.getInstance();
-//        int shuffleCount = model.getCount();
-        genField(baseField, model.getBaseRate(), baseShuffleCount);
-        genField(woodField, model.getWoodRate(), woodShuffleCount, false);
-        genField(mountField, model.getWoodRate(), mountShuffleCount, false, baseField); //***
-        genField(desertField, model.getWoodRate(), mountShuffleCount, false, baseField); //***
+        genField(desertField, model.getWoodRate(), desertShuffleCount, false, baseField);
 
+        composeFieldMap();
+//       //フィールド
+//        for (int i = 1; i < mHeight-1; i++) {
+//            for (int j = 1; j < mWidth-1; j++) {
+//                if (baseField[j][i] == 1) {
+//                    mFieldMapArrs[j][i] = 1;
+//                }
+//            }
+//        }
+//
+//        //フィールド合成　平地、森
+//        for (int i = 1; i < mHeight-1; i++) {
+//            for (int j = 1; j < mWidth-1; j++) {
+//                if (baseField[j][i] == 1 && woodField[j][i] == 1) {
+//                    mFieldMapArrs[j][i] = 2;
+//                }
+//            }
+//        }
+//
+//        //フィールド合成　平地、砂地
+//        for (int i = 1; i < mHeight-1; i++) {
+//            for (int j = 1; j < mWidth-1; j++) {
+//                if (baseField[j][i] == 1 && desertField[j][i] == 1) {
+//                    mFieldMapArrs[j][i] = 4;
+//                }
+//            }
+//        }
+
+    }
+
+    public void executeMount() {
+        mountField = initFieldMap2();
+        // フィールド生成
+        ToolModel model = ToolModel.getInstance();
+        genField(mountField, model.getWoodRate(), mountShuffleCount, false, baseField);
+
+        composeFieldMap();
+
+    }
+
+    private void composeFieldMap() {
         //フィールド
         for (int i = 1; i < mHeight-1; i++) {
             for (int j = 1; j < mWidth-1; j++) {
@@ -118,8 +164,24 @@ public class FieldMapBuilder {
                 }
             }
         }
-//        mFieldMapArrs = baseField;
-//        printFieldMap();
+    }
+
+    public void execute() {
+        // 初期フィールド
+        mFieldMapArrs = initFieldMap2();
+        baseField = initFieldMap2();
+        woodField = initFieldMap2();
+        desertField = initFieldMap2();
+        mountField = initFieldMap2();
+
+        // フィールド生成
+        ToolModel model = ToolModel.getInstance();
+        genField(baseField, model.getBaseRate(), baseShuffleCount);
+        genField(woodField, model.getWoodRate(), woodShuffleCount, false);
+        genField(mountField, model.getWoodRate(), mountShuffleCount, false, baseField); //***
+        genField(desertField, model.getWoodRate(), mountShuffleCount, false, baseField); //***
+
+        composeFieldMap();
     }
 
     private void genField(int[][] field, double land, int count) {
@@ -340,6 +402,14 @@ public class FieldMapBuilder {
 
     public void setMountShuffleCount(int mountShuffleCount) {
         this.mountShuffleCount = mountShuffleCount;
+    }
+
+    public int getDesertShuffleCount() {
+        return desertShuffleCount;
+    }
+
+    public void setDesertShuffleCount(int desertShuffleCount) {
+        this.desertShuffleCount = desertShuffleCount;
     }
 
 }

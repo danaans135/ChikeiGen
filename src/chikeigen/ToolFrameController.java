@@ -55,12 +55,23 @@ public class ToolFrameController {
     private Button executeWoodButton;
 
     @FXML
+    private TextField desertShuffleCountTextField;
+
+    @FXML
+    private Button executeDesertButton;
+
+    @FXML
+    private Button executeMountButton;
+
+    @FXML
     void initialize() {
         // イベント定義
         genButton.setOnAction(ev -> onActionGenButton(ev));
         executeBaseButton.setOnAction(ev -> onActionExecuteBaseButton(ev));
         chipSizeTextField.setOnAction(ev -> onActionChipSizeTextField(ev));
         executeWoodButton.setOnAction(ev -> onActionExecuteWoodButton(ev));
+        executeDesertButton.setOnAction(ev -> onActionExecuteDesertButton(ev));
+        executeMountButton.setOnAction(ev -> onActionExecuteMountButton(ev));
 
         // UIとモデルをバインド
         ToolModel toolModel = ToolModel.getInstance();
@@ -82,6 +93,8 @@ public class ToolFrameController {
                 new NumberStringConverter());
         Bindings.bindBidirectional(woodShuffleCountTextField.textProperty(), toolModel.woodShuffleCountProperty(),
                 new NumberStringConverter());
+        Bindings.bindBidirectional(desertShuffleCountTextField.textProperty(), toolModel.desertShuffleCountProperty(),
+                new NumberStringConverter());
         Bindings.bindBidirectional(mountShuffleCountTextField.textProperty(), toolModel.mountShuffleCountProperty(),
                 new NumberStringConverter());
 
@@ -89,27 +102,28 @@ public class ToolFrameController {
         genFieldMap();
     }
 
+    private void onActionExecuteMountButton(ActionEvent ev) {
+        ToolModel.getInstance().executeMount();
+        refleshFieldMapImage();
+    }
+
+    private void onActionExecuteDesertButton(ActionEvent ev) {
+        ToolModel.getInstance().executeDesert();
+        refleshFieldMapImage();
+    }
+
     private void onActionExecuteWoodButton(ActionEvent ev) {
         ToolModel.getInstance().executeWood();
-        Image fxImage = ToolModel.getInstance().getFieldMapImage();
-        imageView.setImage(fxImage);
-        imageView.setFitWidth(fxImage.getWidth());
-        imageView.setFitHeight(fxImage.getHeight());
+        refleshFieldMapImage();
     }
 
     private void onActionExecuteBaseButton(ActionEvent ev) {
         ToolModel.getInstance().executeBase();
-        Image fxImage = ToolModel.getInstance().getFieldMapImage();
-        imageView.setImage(fxImage);
-        imageView.setFitWidth(fxImage.getWidth());
-        imageView.setFitHeight(fxImage.getHeight());
+        refleshFieldMapImage();
     }
 
     private void onActionChipSizeTextField(ActionEvent ev) {
-        Image fxImage = ToolModel.getInstance().getFieldMapImage();
-        imageView.setImage(fxImage);
-        imageView.setFitWidth(fxImage.getWidth());
-        imageView.setFitHeight(fxImage.getHeight());
+        refleshFieldMapImage();
     }
 
     private void onActionGenButton(ActionEvent ev) {
@@ -118,7 +132,10 @@ public class ToolFrameController {
 
     private void genFieldMap() {
         ToolModel.getInstance().generateFieldMap();
-//        ToolModel.getInstance().executeBase();
+        refleshFieldMapImage();
+    }
+
+    private void refleshFieldMapImage() {
         Image fxImage = ToolModel.getInstance().getFieldMapImage();
         imageView.setImage(fxImage);
         imageView.setFitWidth(fxImage.getWidth());
