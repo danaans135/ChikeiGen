@@ -19,6 +19,7 @@ public class FieldMapBuilder {
     private int[][] woodField;
     private int[][] desertField;
     private int[][] mountField;
+    private int[][] altitude;
 
     public void setFieldSize(int width, int height) {
         mWidth = width;
@@ -35,15 +36,9 @@ public class FieldMapBuilder {
         // フィールド生成
         ToolModel model = ToolModel.getInstance();
         genField(baseField, model.getBaseRate(), baseShuffleCount);
+        calculateAltitude(baseField);
 
-        //フィールド
-        for (int i = 1; i < mHeight-1; i++) {
-            for (int j = 1; j < mWidth-1; j++) {
-                if (baseField[j][i] == 1) {
-                    mFieldMapArrs[j][i] = 1;
-                }
-            }
-        }
+        composeFieldMap();
     }
 
     public void executeWood() {
@@ -54,32 +49,6 @@ public class FieldMapBuilder {
         genField(woodField, model.getWoodRate(), woodShuffleCount, false);
 
         composeFieldMap();
-//        //フィールド
-//        for (int i = 1; i < mHeight-1; i++) {
-//            for (int j = 1; j < mWidth-1; j++) {
-//                if (baseField[j][i] == 1) {
-//                    mFieldMapArrs[j][i] = 1;
-//                }
-//            }
-//        }
-//
-//        //フィールド合成　平地、森
-//        for (int i = 1; i < mHeight-1; i++) {
-//            for (int j = 1; j < mWidth-1; j++) {
-//                if (baseField[j][i] == 1 && woodField[j][i] == 1) {
-//                    mFieldMapArrs[j][i] = 2;
-//                }
-//            }
-//        }
-//
-//        //フィールド合成　平地、砂地
-//        for (int i = 1; i < mHeight-1; i++) {
-//            for (int j = 1; j < mWidth-1; j++) {
-//                if (baseField[j][i] == 1 && desertField[j][i] == 1) {
-//                    mFieldMapArrs[j][i] = 4;
-//                }
-//            }
-//        }
     }
 
     public void executeDesert() {
@@ -89,32 +58,6 @@ public class FieldMapBuilder {
         genField(desertField, model.getWoodRate(), desertShuffleCount, false, baseField);
 
         composeFieldMap();
-//       //フィールド
-//        for (int i = 1; i < mHeight-1; i++) {
-//            for (int j = 1; j < mWidth-1; j++) {
-//                if (baseField[j][i] == 1) {
-//                    mFieldMapArrs[j][i] = 1;
-//                }
-//            }
-//        }
-//
-//        //フィールド合成　平地、森
-//        for (int i = 1; i < mHeight-1; i++) {
-//            for (int j = 1; j < mWidth-1; j++) {
-//                if (baseField[j][i] == 1 && woodField[j][i] == 1) {
-//                    mFieldMapArrs[j][i] = 2;
-//                }
-//            }
-//        }
-//
-//        //フィールド合成　平地、砂地
-//        for (int i = 1; i < mHeight-1; i++) {
-//            for (int j = 1; j < mWidth-1; j++) {
-//                if (baseField[j][i] == 1 && desertField[j][i] == 1) {
-//                    mFieldMapArrs[j][i] = 4;
-//                }
-//            }
-//        }
 
     }
 
@@ -133,7 +76,11 @@ public class FieldMapBuilder {
         for (int i = 1; i < mHeight-1; i++) {
             for (int j = 1; j < mWidth-1; j++) {
                 if (baseField[j][i] == 1) {
-                    mFieldMapArrs[j][i] = 1;
+                    if (altitude[j][i] > 4) {
+                        mFieldMapArrs[j][i] = 5;
+                    } else {
+                        mFieldMapArrs[j][i] = 1;
+                    }
                 }
             }
         }
@@ -177,11 +124,56 @@ public class FieldMapBuilder {
         // フィールド生成
         ToolModel model = ToolModel.getInstance();
         genField(baseField, model.getBaseRate(), baseShuffleCount);
+        calculateAltitude(baseField);
         genField(woodField, model.getWoodRate(), woodShuffleCount, false);
         genField(mountField, model.getWoodRate(), mountShuffleCount, false, baseField); //***
         genField(desertField, model.getWoodRate(), mountShuffleCount, false, baseField); //***
 
         composeFieldMap();
+    }
+
+    private void calculateAltitude(int[][] origField) {
+        altitude = initFieldMap2();
+        int[][] buf = initFieldMap2();
+        for (int i = 1; i < mHeight-1; i++) {
+            for (int j = 1; j < mWidth-1; j++) {
+                if (origField[j][i] == 1) {
+                    buf[j][i] = 1;
+                }
+            }
+        }
+        for (int i = 1; i < mHeight-1; i++) {
+            for (int j = 1; j < mWidth-1; j++) {
+                if (origField[j][i] == 1) {
+                    altitude[j][i] = 1;
+                }
+            }
+        }
+        for (int h = 1; h < mWidth; h++) {
+            for (int i = 1; i < mHeight-1; i++) {
+                for (int j = 1; j < mWidth-1; j++) {
+                    boolean b = buf[j][i] == h &&
+                        (buf[j][i] == buf[j-1][i-1]) &&
+                        (buf[j][i] == buf[j][i-1]) &&
+                        (buf[j][i] == buf[j+1][i-1]) &&
+                        (buf[j][i] == buf[j-1][i]) &&
+                        (buf[j][i] == buf[j][i]) &&
+                        (buf[j][i] == buf[j+1][i]) &&
+                        (buf[j][i] == buf[j-1][i+1]) &&
+                        (buf[j][i] == buf[j][i+1]) &&
+                        (buf[j][i] == buf[j+1][i+1]);
+                    if (b) {
+                        altitude[j][i] = altitude[j][i]+1;
+                    }
+                }
+            }
+            for (int i = 1; i < mHeight-1; i++) {
+                for (int j = 1; j < mWidth-1; j++) {
+                    buf[j][i] = altitude[j][i];
+                }
+            }
+        }
+
     }
 
     private void genField(int[][] field, double land, int count) {
@@ -243,10 +235,6 @@ public class FieldMapBuilder {
                         round += field[j+l][i+k];
                     }
                 }
-//                round += field[j+0][i-1];
-//                round += field[j-1][i+0];
-//                round += field[j+1][i+0];
-//                round += field[j+0][i+1];
                 if (round >= 14) {
                     field[j][i] = 1;
                 } else if (round <= 11) {
@@ -255,37 +243,6 @@ public class FieldMapBuilder {
             }
         }
     }
-
-//    private void procFieldMap() {
-//        for (int i = 1; i < mHeight-1; i++) {
-//            for (int j = 1; j < mWidth-1; j++) {
-//                int count = 0;
-//                count += mFieldMapArrs[j-1][i-1];
-//                count += mFieldMapArrs[j+0][i-1];
-//                count += mFieldMapArrs[j+1][i-1];
-//                count += mFieldMapArrs[j-1][i+0];
-////                count += mFieldMapArrs[j+0][i+0];
-//                count += mFieldMapArrs[j+1][i+0];
-//                count += mFieldMapArrs[j-1][i+1];
-//                count += mFieldMapArrs[j+0][i+1];
-//                count += mFieldMapArrs[j+1][i+1];
-//
-//                switch (count) {
-//                case 0: mFieldMapArrs[j][i] = 0; break;
-//                case 1: mFieldMapArrs[j][i] = (Math.random() < 0.1) ? 1 : 0; break;
-//                case 2: mFieldMapArrs[j][i] = (Math.random() < 0.2) ? 1 : 0; break;
-//                case 3: mFieldMapArrs[j][i] = (Math.random() < 0.3) ? 1 : 0; break;
-//                case 4: mFieldMapArrs[j][i] = (Math.random() < 0.5) ? 1 : 0; break;
-//                case 5: mFieldMapArrs[j][i] = (Math.random() < 0.7) ? 1 : 0; break;
-//                case 6: mFieldMapArrs[j][i] = (Math.random() < 0.8) ? 1 : 0; break;
-//                case 7: mFieldMapArrs[j][i] = (Math.random() < 0.9) ? 1 : 0; break;
-//                case 8: mFieldMapArrs[j][i] = 1; break;
-//                default:
-//                    break;
-//                }
-//            }
-//        }
-//    }
 
     private void procFieldMap2(int[][] field) {
         for (int i = 1; i < mHeight-1; i++) {
@@ -305,10 +262,6 @@ public class FieldMapBuilder {
                 field[j][i] = (r < rates[count]) ? 1 : 0;
             }
         }
-    }
-
-    private void initFieldMap() {
-        mFieldMapArrs = initFieldMap2();
     }
 
     private int[][] initFieldMap2() {
@@ -365,10 +318,11 @@ public class FieldMapBuilder {
                 Color c = Color.black;
                 switch (mFieldMapArrs[j][i]) {
                 case 0: c = Color.decode("#9090f0"); break;
-                case 1: c = Color.decode("#d0ffd0"); break;
+                case 1: c = Color.decode("#c0ffc0"); break;
                 case 2: c = Color.decode("#90f090"); break;
                 case 3: c = Color.decode("#f0d090"); break;
                 case 4: c = Color.decode("#f0f090"); break;
+                case 5: c = Color.decode("#d8ffd8"); break;
                 default:
                     break;
                 }
