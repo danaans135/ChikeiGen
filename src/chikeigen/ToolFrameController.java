@@ -77,8 +77,8 @@ public class ToolFrameController {
         ToolModel toolModel = ToolModel.getInstance();
         Bindings.bindBidirectional(alphaSlider.valueProperty(), toolModel.fieldMapOpacityProperty());
         imageView.opacityProperty().bind(toolModel.fieldMapOpacityProperty());
-        Bindings.bindBidirectional(countTextField.textProperty(), toolModel.countProperty(),
-                new NumberStringConverter());
+//        Bindings.bindBidirectional(countTextField.textProperty(), toolModel.countProperty(),
+//                new NumberStringConverter());
         Bindings.bindBidirectional(fieldWidthTextField.textProperty(), toolModel.fieldWidthProperty(),
                 new NumberStringConverter());
         Bindings.bindBidirectional(fieldHeightTextField.textProperty(), toolModel.fieldHeightProperty(),

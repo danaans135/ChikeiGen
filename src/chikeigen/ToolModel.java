@@ -33,10 +33,10 @@ public class ToolModel {
         return sInatance;
     }
 
-    private SimpleIntegerProperty count = new SimpleIntegerProperty();
-    public SimpleIntegerProperty countProperty() { return count; }
-    public int getCount() { return count.getValue(); }
-    public void setCount(int count) { this.count.setValue(count); }
+//    private SimpleIntegerProperty count = new SimpleIntegerProperty();
+//    public SimpleIntegerProperty countProperty() { return count; }
+//    public int getCount() { return count.getValue(); }
+//    public void setCount(int count) { this.count.setValue(count); }
 
     private SimpleStringProperty title = new SimpleStringProperty();
     public SimpleStringProperty titleProperty() { return title; }
@@ -96,8 +96,8 @@ public class ToolModel {
     private ToolModel() {
         mBuilder = new FieldMapBuilder();
         setTitle(TITLE);
-        setCount(DEFAULT_COUNT);
-        setFieldMapOpacity(1.0);
+//        setCount(DEFAULT_COUNT);
+        setFieldMapOpacity(0.4);
         setFieldWidth(DEFAULT_FIELD_WIDTH);
         setFieldHeight(DEFAULT_FIELD_HEIGHT);
         setBaseRate(DEFAULT_BASE_RATE);

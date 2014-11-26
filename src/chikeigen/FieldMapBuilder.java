@@ -317,7 +317,7 @@ public class FieldMapBuilder {
             for (int j = 0; j < mWidth; j++) {
                 Color c = Color.black;
                 switch (mFieldMapArrs[j][i]) {
-                case 0: c = Color.decode("#9090f0"); break;
+                case 0: c = Color.decode("#9090a0"); break;
                 case 1: c = Color.decode("#c0ffc0"); break;
                 case 2: c = Color.decode("#90f090"); break;
                 case 3: c = Color.decode("#f0d090"); break;
