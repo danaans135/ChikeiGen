@@ -15,7 +15,7 @@
    <children>
       <ScrollPane layoutX="242.0" layoutY="16.0" prefHeight="241.0" prefViewportHeight="288.0" prefViewportWidth="174.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="16.0">
          <content>
-            <VBox layoutX="245.0" layoutY="16.0" prefHeight="241.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="16.0">
+            <VBox layoutX="245.0" layoutY="16.0" prefHeight="241.0" spacing="2.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="16.0">
                <children>
                   <Button fx:id="genButton" mnemonicParsing="false" text="生成" />
                   <HBox>
@@ -26,12 +26,6 @@
                         <Button fx:id="executeMountButton" mnemonicParsing="false" text="山地" />
                      </children>
                   </HBox>
-                  <Label text="シャッフル回数">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="countTextField" promptText="シャッフル回数" />
                   <Label text="幅">
                      <font>
                         <Font size="10.0" />
@@ -44,6 +38,13 @@
                      </font>
                   </Label>
                   <TextField fx:id="fieldHeightTextField" promptText="高さ" />
+                  <Label text="チップのサイズ">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="chipSizeTextField" />
+                  <Separator />
                   <Label text="陸地率">
                      <font>
                         <Font size="10.0" />
@@ -56,12 +57,6 @@
                      </font>
                   </Label>
                   <TextField fx:id="woodRateTextField" promptText="森率(0-1.0)" />
-                  <Label text="チップのサイズ">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="chipSizeTextField" />
                   <Slider fx:id="alphaSlider" max="1.0" prefHeight="14.0">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />

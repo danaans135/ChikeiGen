@@ -3,6 +3,7 @@ package chikeigen;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class FieldMapBuilder {
     private static final int DEFAULT_WIDTH = 200;
@@ -20,6 +21,9 @@ public class FieldMapBuilder {
     private int[][] desertField;
     private int[][] mountField;
     private int[][] altitude;
+    private int baseSeed = 0;
+    private Random rand = new Random(-1);
+    private int randSeed;
 
     public void setFieldSize(int width, int height) {
         mWidth = width;
@@ -34,8 +38,9 @@ public class FieldMapBuilder {
         mountField = initFieldMap2();
 
         // フィールド生成
+        initRandom(baseSeed);
         ToolModel model = ToolModel.getInstance();
-        genField(baseField, model.getBaseRate(), baseShuffleCount);
+        genField(baseField, model.getBaseRate(), baseShuffleCount, true, null);
         calculateAltitude(baseField);
 
         composeFieldMap();
@@ -45,8 +50,9 @@ public class FieldMapBuilder {
         woodField = initFieldMap2();
 
         // フィールド生成
+        initRandom(-1);
         ToolModel model = ToolModel.getInstance();
-        genField(woodField, model.getWoodRate(), woodShuffleCount, false);
+        genField(woodField, model.getWoodRate(), woodShuffleCount, false, null);
 
         composeFieldMap();
     }
@@ -122,6 +128,7 @@ public class FieldMapBuilder {
         mountField = initFieldMap2();
 
         // フィールド生成
+        initRandom(-1);
         ToolModel model = ToolModel.getInstance();
         genField(baseField, model.getBaseRate(), baseShuffleCount);
         calculateAltitude(baseField);
@@ -182,13 +189,18 @@ public class FieldMapBuilder {
     private void genField(int[][] field, double land, int count, boolean arrange) {
         genField(field, land, count, arrange, null);
     }
+//    private void genField(int[][] field, double land, int count, boolean arrange, int[][] mask) {
+//        genField(field, land, count, -1, arrange, null);
+//    }
     private void genField(int[][] field, double land, int count, boolean arrange, int[][] mask) {
         // ランダム
 //        double land = 0.5;
+//        initRandom(seed);
+//        rand.nextDouble();
         for (int i = 1; i < mHeight-1; i++) {
             for (int j = 1; j < mWidth-1; j++) {
                 if (mask != null && mask[j][i] == 0) continue;
-                field[j][i] = (Math.random() < land) ? 1 : 0;
+                field[j][i] = (random() < land) ? 1 : 0;
             }
         }
 
@@ -203,6 +215,16 @@ public class FieldMapBuilder {
             arrangeFieldMap2(field);
         }
 
+    }
+
+    private double random() {
+        if (randSeed == -1) return Math.random();
+        return rand.nextDouble();
+    }
+
+    private void initRandom(int seed) {
+        randSeed = seed;
+        rand = new Random(randSeed);
     }
 
     private void arrangeFieldMap2(int[][] field) {
@@ -258,7 +280,7 @@ public class FieldMapBuilder {
                 count += field[j+1][i+1];
 
                 double[] rates = { 0, 0.1, 0.2, 0.2, 0.5, 0.8, 0.8, 0.9, 1 };
-                double r = Math.random();
+                double r = random();
                 field[j][i] = (r < rates[count]) ? 1 : 0;
             }
         }
@@ -364,6 +386,14 @@ public class FieldMapBuilder {
 
     public void setDesertShuffleCount(int desertShuffleCount) {
         this.desertShuffleCount = desertShuffleCount;
+    }
+
+    public int getBaseSeed() {
+        return baseSeed;
+    }
+
+    public void setBaseSeed(int baseSeed) {
+        this.baseSeed = baseSeed;
     }
 
 }
