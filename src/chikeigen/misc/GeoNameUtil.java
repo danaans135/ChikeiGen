@@ -857,6 +857,40 @@ public class GeoNameUtil {
         "ヴァイマール",
     };
 
+    private static String[] en = {
+        "サーソー",
+        "グラスゴー",
+        "インヴァネス",
+        "プレストウィック",
+        "ハイランド",
+        "クラックマナンシャイア",
+        "フォルカーク",
+        "エッジウェア",
+        "トッテリッジ",
+        "アークリー",
+        "ロードタウン",
+        "フラム",
+        "グリニッジ",
+        "ステップニー",
+        "イズリントン",
+        "ケンジントン",
+        "ボルトン",
+        "ノッティンガム",
+        "ノリッチ",
+        "スウィンドン",
+        "アビンドン",
+        "ブレナヴォン",
+        "スウォンジ",
+        "ニューポート",
+        "カーディフ",
+        "カーマーゼン",
+        "アントリム",
+        "ロンドンデリー",
+        "アーマー",
+        "ベルファスト",
+
+    };
+
     public static void main(String[] args) {
         String lf = System.getProperty("line.separator");
         StringBuilder s = new StringBuilder();
@@ -885,21 +919,11 @@ public class GeoNameUtil {
         }
         s.append(lf);
        System.out.println(s);
-//       System.out.println(getGeoName(3));
-//       System.out.println(getGeoName(3));
-//       System.out.println(getGeoName(3));
-//       System.out.println(getGeoName(4));
-//       System.out.println(getGeoName(4));
-//       System.out.println(getGeoName(4));
-//       System.out.println(getGeoName(5));
-//       System.out.println(getGeoName(5));
-//       System.out.println(getGeoName(5));
-//       System.out.println(getGeoName(5));
 
     }
 
     private static StringBuilder getGeoName(int nameLength) {
-        return getGeoName(de, nameLength);
+        return getGeoName(en, nameLength);
     }
 
     private static StringBuilder getGeoName(String[] names, int nameLength) {
