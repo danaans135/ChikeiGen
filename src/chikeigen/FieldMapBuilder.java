@@ -21,9 +21,9 @@ public class FieldMapBuilder {
     private int[][] desertField;
     private int[][] mountField;
     private int[][] altitude;
-    private int baseSeed = 0;
+    private long baseSeed = 0;
     private Random rand = new Random(-1);
-    private int randSeed;
+    private long randSeed;
 
     public void setFieldSize(int width, int height) {
         mWidth = width;
@@ -222,7 +222,7 @@ public class FieldMapBuilder {
         return rand.nextDouble();
     }
 
-    private void initRandom(int seed) {
+    private void initRandom(long seed) {
         randSeed = seed;
         rand = new Random(randSeed);
     }
@@ -388,11 +388,11 @@ public class FieldMapBuilder {
         this.desertShuffleCount = desertShuffleCount;
     }
 
-    public int getBaseSeed() {
+    public long getBaseSeed() {
         return baseSeed;
     }
 
-    public void setBaseSeed(int baseSeed) {
+    public void setBaseSeed(long baseSeed) {
         this.baseSeed = baseSeed;
     }
 

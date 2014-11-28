@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -93,6 +94,11 @@ public class ToolModel {
     public int getMountShuffleCount() { return mountShuffleCount.getValue(); }
     public void setMountShuffleCount(int mountShuffleCount) { this.mountShuffleCount.setValue(mountShuffleCount); }
 
+    private SimpleLongProperty baseSeed = new SimpleLongProperty();
+    public SimpleLongProperty baseSeedProperty() { return baseSeed; }
+    public long getBaseSeed() { return baseSeed.getValue(); }
+    public void setBaseSeed(long baseSeed) { this.baseSeed.setValue(baseSeed); }
+
     private ToolModel() {
         mBuilder = new FieldMapBuilder();
         setTitle(TITLE);
@@ -112,6 +118,7 @@ public class ToolModel {
     public void executeBase() {
         mBuilder.setFieldSize(getFieldWidth(), getFieldHeight());
         mBuilder.setBaseShuffleCount(getBaseShuffleCount());
+        mBuilder.setBaseSeed(getBaseSeed());
         mBuilder.executeBase();
 //        mBuilder.printFieldMap();
     }

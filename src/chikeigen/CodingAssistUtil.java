@@ -10,6 +10,7 @@ public class CodingAssistUtil {
         propTypeMap.put("int", "SimpleIntegerProperty");
         propTypeMap.put("String", "SimpleStringProperty");
         propTypeMap.put("double", "SimpleDoubleProperty");
+        propTypeMap.put("long", "SimpleLongProperty");
     }
 
     public static void main(String[] args) {
@@ -29,6 +30,7 @@ public class CodingAssistUtil {
         outProp("woodShuffleCount", "int");
         outProp("desertShuffleCount", "int");
         outProp("mountShuffleCount", "int");
+        outProp("baseSeed", "long");
 
 //        System.out.println("----------------------");
 //        System.out.println("public class Builder {");

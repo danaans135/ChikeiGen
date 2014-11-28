@@ -64,6 +64,9 @@ public class ToolFrameController {
     private Button executeMountButton;
 
     @FXML
+    private TextField baseSeedTextField;
+
+    @FXML
     void initialize() {
         // イベント定義
         genButton.setOnAction(ev -> onActionGenButton(ev));
@@ -96,6 +99,8 @@ public class ToolFrameController {
         Bindings.bindBidirectional(desertShuffleCountTextField.textProperty(), toolModel.desertShuffleCountProperty(),
                 new NumberStringConverter());
         Bindings.bindBidirectional(mountShuffleCountTextField.textProperty(), toolModel.mountShuffleCountProperty(),
+                new NumberStringConverter());
+        Bindings.bindBidirectional(baseSeedTextField.textProperty(), toolModel.baseSeedProperty(),
                 new NumberStringConverter());
 
         // 地図生成
