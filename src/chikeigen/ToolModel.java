@@ -153,4 +153,7 @@ public class ToolModel {
         WritableImage fxImage = SwingFXUtils.toFXImage(img, null);
         return fxImage;
     }
+    public void genBaseSeedRandom() {
+        setBaseSeed((int)(Math.random() * Integer.MAX_VALUE));
+    }
 }

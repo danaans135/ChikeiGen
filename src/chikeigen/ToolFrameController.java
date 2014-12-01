@@ -67,6 +67,12 @@ public class ToolFrameController {
     private TextField baseSeedTextField;
 
     @FXML
+    private Button baseSeedRandomButton;
+
+    @FXML
+    private TextField alphaTextField;
+
+    @FXML
     void initialize() {
         // イベント定義
         genButton.setOnAction(ev -> onActionGenButton(ev));
@@ -75,10 +81,12 @@ public class ToolFrameController {
         executeWoodButton.setOnAction(ev -> onActionExecuteWoodButton(ev));
         executeDesertButton.setOnAction(ev -> onActionExecuteDesertButton(ev));
         executeMountButton.setOnAction(ev -> onActionExecuteMountButton(ev));
+        baseSeedRandomButton.setOnAction(ev -> onActionBaseSeedRandomButton(ev));
 
         // UIとモデルをバインド
         ToolModel toolModel = ToolModel.getInstance();
         Bindings.bindBidirectional(alphaSlider.valueProperty(), toolModel.fieldMapOpacityProperty());
+        Bindings.bindBidirectional(alphaTextField.textProperty(), toolModel.fieldMapOpacityProperty(), new NumberStringConverter());
         imageView.opacityProperty().bind(toolModel.fieldMapOpacityProperty());
 //        Bindings.bindBidirectional(countTextField.textProperty(), toolModel.countProperty(),
 //                new NumberStringConverter());
@@ -105,6 +113,10 @@ public class ToolFrameController {
 
         // 地図生成
         genFieldMap();
+    }
+
+    private void onActionBaseSeedRandomButton(ActionEvent ev) {
+        ToolModel.getInstance().genBaseSeedRandom();
     }
 
     private void onActionExecuteMountButton(ActionEvent ev) {

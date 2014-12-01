@@ -307,30 +307,6 @@ public class FieldMapBuilder {
         }
     }
 
-//    public BufferedImage getFieldMapImage() {
-//
-//        BufferedImage img = new BufferedImage(mWidth, mHeight, BufferedImage.TYPE_INT_RGB);
-//        Graphics2D g2 = img.createGraphics();
-//
-//        for (int i = 0; i < mHeight; i++) {
-//            for (int j = 0; j < mWidth; j++) {
-//                Color c = Color.black;
-//                switch (mFieldMapArrs[j][i]) {
-//                case 0: c = Color.decode("#9090f0"); break;
-//                case 1: c = Color.decode("#d0ffd0"); break;
-//                case 2: c = Color.decode("#90f090"); break;
-//                case 3: c = Color.decode("#f0d090"); break;
-//                default:
-//                    break;
-//                }
-//                g2.setPaint(c);
-//                g2.drawRect(j, i, 1, 1);
-//            }
-//        }
-//
-//        return img;
-//    }
-
     public BufferedImage getFieldMapImage2(int chipSize) {
         BufferedImage img = new BufferedImage(mWidth * chipSize, mHeight * chipSize, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = img.createGraphics();

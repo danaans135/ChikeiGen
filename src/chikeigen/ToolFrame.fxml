@@ -44,13 +44,33 @@
                      </font>
                   </Label>
                   <TextField fx:id="chipSizeTextField" />
+                  <Label text="透過率">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Slider fx:id="alphaSlider" max="1.0" prefHeight="14.0" prefWidth="120.0">
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Slider>
+                        <TextField fx:id="alphaTextField" prefWidth="40.0" />
+                     </children>
+                  </HBox>
                   <Separator />
                   <Label text="陸地シード">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="baseSeedTextField" promptText="地率(0.0-1.0)" />
+                  <HBox>
+                     <children>
+                        <TextField fx:id="baseSeedTextField" prefHeight="23.0" prefWidth="118.0" />
+                        <Button fx:id="baseSeedRandomButton" mnemonicParsing="false" text="乱数" />
+                     </children>
+                  </HBox>
                   <Label text="陸地率">
                      <font>
                         <Font size="10.0" />
@@ -63,16 +83,6 @@
                      </font>
                   </Label>
                   <TextField fx:id="woodRateTextField" promptText="森率(0-1.0)" />
-                  <Label text="透過率">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <Slider fx:id="alphaSlider" max="1.0" prefHeight="14.0">
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Slider>
                   <Label text="陸地シャッフル回数">
                      <font>
                         <Font size="10.0" />
