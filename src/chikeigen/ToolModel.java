@@ -99,6 +99,21 @@ public class ToolModel {
     public long getBaseSeed() { return baseSeed.getValue(); }
     public void setBaseSeed(long baseSeed) { this.baseSeed.setValue(baseSeed); }
 
+    private SimpleLongProperty woodSeed = new SimpleLongProperty();
+    public SimpleLongProperty woodSeedProperty() { return woodSeed; }
+    public long getWoodSeed() { return woodSeed.getValue(); }
+    public void setWoodSeed(long woodSeed) { this.woodSeed.setValue(woodSeed); }
+
+    private SimpleLongProperty desertSeed = new SimpleLongProperty();
+    public SimpleLongProperty desertSeedProperty() { return desertSeed; }
+    public long getDesertSeed() { return desertSeed.getValue(); }
+    public void setDesertSeed(long desertSeed) { this.desertSeed.setValue(desertSeed); }
+
+    private SimpleLongProperty mountSeed = new SimpleLongProperty();
+    public SimpleLongProperty mountSeedProperty() { return mountSeed; }
+    public long getMountSeed() { return mountSeed.getValue(); }
+    public void setMountSeed(long mountSeed) { this.mountSeed.setValue(mountSeed); }
+
     private ToolModel() {
         mBuilder = new FieldMapBuilder();
         setTitle(TITLE);
@@ -113,6 +128,10 @@ public class ToolModel {
         setWoodShuffleCount(DEFAULT_SHUFFLE_COUNT);
         setDesertShuffleCount(DEFAULT_SHUFFLE_COUNT);
         setMountShuffleCount(DEFAULT_SHUFFLE_COUNT);
+        setBaseSeed(0);
+        setWoodSeed(1);
+        setDesertSeed(2);
+        setMountSeed(3);
     }
 
     public void executeBase() {
@@ -125,6 +144,7 @@ public class ToolModel {
 
     public void executeWood() {
         mBuilder.setWoodShuffleCount(getWoodShuffleCount());
+        mBuilder.setWoodSeed(getWoodSeed());
         mBuilder.executeWood();
     }
 

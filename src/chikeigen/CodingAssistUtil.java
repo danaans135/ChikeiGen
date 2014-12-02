@@ -31,6 +31,9 @@ public class CodingAssistUtil {
         outProp("desertShuffleCount", "int");
         outProp("mountShuffleCount", "int");
         outProp("baseSeed", "long");
+        outProp("woodSeed", "long");
+        outProp("desertSeed", "long");
+        outProp("mountSeed", "long");
 
 //        System.out.println("----------------------");
 //        System.out.println("public class Builder {");
@@ -78,7 +81,8 @@ public class CodingAssistUtil {
     }
 
     private static void outProp(String prop, String jtype) {
-        outProp(prop, getPropType(jtype), jtype);
+//        outProp(prop, getPropType(jtype), jtype);
+        outNormalProp(prop, jtype);
     }
 
     private static String getPropType(String jtype) {
@@ -95,5 +99,15 @@ public class CodingAssistUtil {
                 + "public %3$s get%4$s() { return %2$s.getValue(); }%n"
                 + "public void set%4$s(%3$s %2$s) { this.%2$s.setValue(%2$s); }%n"
                 , propType, prop, jtype, lprop);
+    }
+
+    private static void outNormalProp(String prop, String javaType) {
+        String lprop = prop.substring(0, 1).toUpperCase() + prop.substring(1);
+
+        System.out.printf("%n"
+                + "private %1$s %2$s;%n"
+                + "public %1$s get%3$s() { return %2$s; }%n"
+                + "public void set%3$s(%1$s %2$s) { this.%2$s = %2$s; }%n"
+                , javaType, prop, lprop);
     }
 }

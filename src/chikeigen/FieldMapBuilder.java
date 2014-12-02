@@ -22,6 +22,19 @@ public class FieldMapBuilder {
     private int[][] mountField;
     private int[][] altitude;
     private long baseSeed = 0;
+
+    private long woodSeed = 0;
+    public long getWoodSeed() { return woodSeed; }
+    public void setWoodSeed(long woodSeed) { this.woodSeed = woodSeed; }
+
+    private long desertSeed;
+    public long getDesertSeed() { return desertSeed; }
+    public void setDesertSeed(long desertSeed) { this.desertSeed = desertSeed; }
+
+    private long mountSeed;
+    public long getMountSeed() { return mountSeed; }
+    public void setMountSeed(long mountSeed) { this.mountSeed = mountSeed; }
+
     private Random rand = new Random(-1);
     private long randSeed;
 
@@ -50,7 +63,7 @@ public class FieldMapBuilder {
         woodField = initFieldMap2();
 
         // フィールド生成
-        initRandom(-1);
+        initRandom(woodSeed);
         ToolModel model = ToolModel.getInstance();
         genField(woodField, model.getWoodRate(), woodShuffleCount, false, null);
 
