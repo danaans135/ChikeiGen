@@ -13,111 +13,172 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="443.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chikeigen.ToolFrameController">
    <children>
-      <ScrollPane layoutX="242.0" layoutY="16.0" prefHeight="241.0" prefViewportHeight="288.0" prefViewportWidth="174.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="16.0">
-         <content>
-            <VBox layoutX="245.0" layoutY="16.0" prefHeight="241.0" spacing="2.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="16.0">
-               <children>
-                  <Button fx:id="genButton" mnemonicParsing="false" text="生成" />
-                  <HBox>
+      <SplitPane dividerPositions="0.5" layoutX="14.0" layoutY="14.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+         <items>
+            <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="241.0" prefViewportHeight="204.0" prefViewportWidth="214.0" prefWidth="229.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="14.0">
+               <content>
+                  <ImageView fx:id="imageView" fitHeight="204.0" fitWidth="214.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" smooth="false" />
+               </content>
+            </ScrollPane>
+            <ScrollPane prefHeight="241.0" prefViewportHeight="288.0" prefViewportWidth="174.0">
+               <content>
+                  <VBox layoutX="245.0" layoutY="16.0" prefHeight="241.0" spacing="2.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="16.0">
                      <children>
-                        <Button fx:id="executeBaseButton" mnemonicParsing="false" text="陸地" />
-                        <Button fx:id="executeWoodButton" mnemonicParsing="false" text="森林" />
-                        <Button fx:id="executeDesertButton" mnemonicParsing="false" text="砂漠" />
-                        <Button fx:id="executeMountButton" mnemonicParsing="false" text="山地" />
-                     </children>
-                  </HBox>
-                  <Label text="幅">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="fieldWidthTextField" promptText="幅" />
-                  <Label text="高さ">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="fieldHeightTextField" promptText="高さ" />
-                  <Label text="チップのサイズ">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="chipSizeTextField" />
-                  <Label text="透過率">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER_LEFT">
-                     <children>
-                        <Slider fx:id="alphaSlider" max="1.0" prefHeight="14.0" prefWidth="120.0">
+                        <Label text="チップのサイズ">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="chipSizeTextField" />
+                        <Label text="透過率">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Slider fx:id="alphaSlider" max="1.0" prefHeight="14.0" prefWidth="120.0">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Slider>
+                              <TextField fx:id="alphaTextField" prefWidth="40.0" />
+                           </children>
+                        </HBox>
+                        <Separator prefWidth="200.0">
                            <VBox.margin>
-                              <Insets bottom="10.0" top="10.0" />
+                              <Insets bottom="4.0" top="8.0" />
                            </VBox.margin>
-                        </Slider>
-                        <TextField fx:id="alphaTextField" prefWidth="40.0" />
+                        </Separator>
+                        <Button fx:id="genButton" mnemonicParsing="false" text="生成" />
+                        <HBox>
+                           <children>
+                              <Button fx:id="executeBaseButton" mnemonicParsing="false" text="陸地" />
+                              <Button fx:id="executeWoodButton" mnemonicParsing="false" text="森林" />
+                              <Button fx:id="executeDesertButton" mnemonicParsing="false" text="砂漠" />
+                              <Button fx:id="executeMountButton" mnemonicParsing="false" text="山地" />
+                           </children>
+                        </HBox>
+                        <Label text="幅">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="fieldWidthTextField" promptText="幅" />
+                        <Label text="高さ">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="fieldHeightTextField" promptText="高さ" />
+                        <Separator>
+                           <VBox.margin>
+                              <Insets bottom="4.0" top="8.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <Label text="陸地シード">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <TextField fx:id="baseSeedTextField" prefHeight="23.0" prefWidth="118.0" />
+                              <Button fx:id="baseSeedRandomButton" mnemonicParsing="false" text="乱数" />
+                           </children>
+                        </HBox>
+                        <Label text="陸地率">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="baseRateTextField" promptText="地率(0.0-1.0)" />
+                        <Label text="陸地シャッフル回数">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="baseShuffleCountTextField" promptText="シャッフル回数" />
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="4.0" top="8.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <Label text="森林シード">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <TextField fx:id="woodSeedTextField" prefHeight="23.0" prefWidth="118.0" />
+                              <Button fx:id="woodSeedRandomButton" mnemonicParsing="false" text="乱数" />
+                           </children>
+                        </HBox>
+                        <Label text="森林率">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="woodRateTextField" promptText="森率(0-1.0)" />
+                        <Label text="森林シャッフル回数">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="woodShuffleCountTextField" promptText="シャッフル回数" />
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="4.0" top="8.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <Label text="砂漠シード">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <TextField fx:id="desertSeedTextField" prefHeight="23.0" prefWidth="118.0" />
+                              <Button fx:id="desertSeedRandomButton" mnemonicParsing="false" text="乱数" />
+                           </children>
+                        </HBox>
+                        <Label text="砂漠シャッフル回数">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="desertShuffleCountTextField" promptText="シャッフル回数" />
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="4.0" top="8.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <Label text="山地シード">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <TextField fx:id="mountSeedTextField" prefHeight="23.0" prefWidth="118.0" />
+                              <Button fx:id="mountSeedRandomButton" mnemonicParsing="false" text="乱数" />
+                           </children>
+                        </HBox>
+                        <Label text="山地シャッフル回数">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="mountShuffleCountTextField" promptText="シャッフル回数" />
                      </children>
-                  </HBox>
-                  <Separator />
-                  <Label text="陸地シード">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <HBox>
-                     <children>
-                        <TextField fx:id="baseSeedTextField" prefHeight="23.0" prefWidth="118.0" />
-                        <Button fx:id="baseSeedRandomButton" mnemonicParsing="false" text="乱数" />
-                     </children>
-                  </HBox>
-                  <Label text="陸地率">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="baseRateTextField" promptText="地率(0.0-1.0)" />
-                  <Label text="森林率">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="woodRateTextField" promptText="森率(0-1.0)" />
-                  <Label text="陸地シャッフル回数">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="baseShuffleCountTextField" promptText="シャッフル回数" />
-                  <Label text="森林シャッフル回数">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="woodShuffleCountTextField" promptText="シャッフル回数" />
-                  <Label text="砂漠シャッフル回数">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="desertShuffleCountTextField" promptText="シャッフル回数" />
-                  <Label text="山地シャッフル回数">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="mountShuffleCountTextField" promptText="シャッフル回数" />
-               </children>
-            </VBox>
-         </content>
-         <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-         </padding>
-      </ScrollPane>
-      <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="241.0" prefViewportHeight="204.0" prefViewportWidth="214.0" prefWidth="229.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="14.0">
-         <content>
-            <ImageView fx:id="imageView" fitHeight="204.0" fitWidth="214.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" smooth="false" />
-         </content>
-      </ScrollPane>
+                  </VBox>
+               </content>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </ScrollPane>
+         </items>
+      </SplitPane>
    </children>
 </AnchorPane>

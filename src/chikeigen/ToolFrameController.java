@@ -13,16 +13,13 @@ import javafx.util.converter.NumberStringConverter;
 public class ToolFrameController {
 
     @FXML
-    private Button genButton;
+    private TextField woodSeedTextField;
 
     @FXML
-    private TextField woodRateTextField;
+    private Button executeWoodButton;
 
     @FXML
-    private TextField countTextField;
-
-    @FXML
-    private TextField fieldWidthTextField;
+    private TextField baseSeedTextField;
 
     @FXML
     private TextField baseRateTextField;
@@ -31,46 +28,65 @@ public class ToolFrameController {
     private ImageView imageView;
 
     @FXML
-    private TextField fieldHeightTextField;
-
-    @FXML
-    private TextField chipSizeTextField;
-
-    @FXML
-    private Slider alphaSlider;
-
-    @FXML
     private TextField baseShuffleCountTextField;
-
-    @FXML
-    private TextField woodShuffleCountTextField;
-
-    @FXML
-    private TextField mountShuffleCountTextField;
 
     @FXML
     private Button executeBaseButton;
 
     @FXML
-    private Button executeWoodButton;
+    private Slider alphaSlider;
 
     @FXML
     private TextField desertShuffleCountTextField;
 
     @FXML
-    private Button executeDesertButton;
+    private TextField desertSeedTextField;
 
     @FXML
     private Button executeMountButton;
 
     @FXML
-    private TextField baseSeedTextField;
+    private TextField chipSizeTextField;
+
+    @FXML
+    private Button desertSeedRandomButton;
+
+    @FXML
+    private TextField woodShuffleCountTextField;
+
+    @FXML
+    private TextField mountSeedTextField;
+
+    @FXML
+    private TextField fieldWidthTextField;
+
+    @FXML
+    private TextField fieldHeightTextField;
+
+    @FXML
+    private Button genButton;
+
+    @FXML
+    private TextField woodRateTextField;
 
     @FXML
     private Button baseSeedRandomButton;
 
     @FXML
+    private Button executeDesertButton;
+
+    @FXML
     private TextField alphaTextField;
+
+    @FXML
+    private Button woodSeedRandomButton;
+
+    @FXML
+    private Button mountSeedRandomButton;
+
+    @FXML
+    private TextField mountShuffleCountTextField;
+
 
     @FXML
     void initialize() {
@@ -82,14 +98,15 @@ public class ToolFrameController {
         executeDesertButton.setOnAction(ev -> onActionExecuteDesertButton(ev));
         executeMountButton.setOnAction(ev -> onActionExecuteMountButton(ev));
         baseSeedRandomButton.setOnAction(ev -> onActionBaseSeedRandomButton(ev));
+        woodSeedRandomButton.setOnAction(ev -> onActionWoodSeedRandomButton(ev));
+        desertSeedRandomButton.setOnAction(ev -> onActionDesertSeedRandomButton(ev));
+        mountSeedRandomButton.setOnAction(ev -> onActionMountSeedRandomButton(ev));
 
         // UIとモデルをバインド
         ToolModel toolModel = ToolModel.getInstance();
         Bindings.bindBidirectional(alphaSlider.valueProperty(), toolModel.fieldMapOpacityProperty());
         Bindings.bindBidirectional(alphaTextField.textProperty(), toolModel.fieldMapOpacityProperty(), new NumberStringConverter());
         imageView.opacityProperty().bind(toolModel.fieldMapOpacityProperty());
-//        Bindings.bindBidirectional(countTextField.textProperty(), toolModel.countProperty(),
-//                new NumberStringConverter());
         Bindings.bindBidirectional(fieldWidthTextField.textProperty(), toolModel.fieldWidthProperty(),
                 new NumberStringConverter());
         Bindings.bindBidirectional(fieldHeightTextField.textProperty(), toolModel.fieldHeightProperty(),
@@ -110,6 +127,12 @@ public class ToolFrameController {
                 new NumberStringConverter());
         Bindings.bindBidirectional(baseSeedTextField.textProperty(), toolModel.baseSeedProperty(),
                 new NumberStringConverter());
+        Bindings.bindBidirectional(woodSeedTextField.textProperty(), toolModel.woodSeedProperty(),
+                new NumberStringConverter());
+        Bindings.bindBidirectional(desertSeedTextField.textProperty(), toolModel.desertSeedProperty(),
+                new NumberStringConverter());
+        Bindings.bindBidirectional(mountSeedTextField.textProperty(), toolModel.mountSeedProperty(),
+                new NumberStringConverter());
 
         // 地図生成
         genFieldMap();
@@ -119,22 +142,38 @@ public class ToolFrameController {
         ToolModel.getInstance().genBaseSeedRandom();
     }
 
+    private void onActionWoodSeedRandomButton(ActionEvent ev) {
+        ToolModel.getInstance().genWoodSeedRandom();
+    }
+
+    private void onActionDesertSeedRandomButton(ActionEvent ev) {
+        ToolModel.getInstance().genDesertSeedRandom();
+    }
+
+    private void onActionMountSeedRandomButton(ActionEvent ev) {
+        ToolModel.getInstance().genMountSeedRandom();
+    }
+
     private void onActionExecuteMountButton(ActionEvent ev) {
+        ToolModel.getInstance().genMountSeedRandom();
         ToolModel.getInstance().executeMount();
         refleshFieldMapImage();
     }
 
     private void onActionExecuteDesertButton(ActionEvent ev) {
+        ToolModel.getInstance().genDesertSeedRandom();
         ToolModel.getInstance().executeDesert();
         refleshFieldMapImage();
     }
 
     private void onActionExecuteWoodButton(ActionEvent ev) {
-        ToolModel.getInstance().executeWood();
+        ToolModel.getInstance().genWoodSeedRandom();
+       ToolModel.getInstance().executeWood();
         refleshFieldMapImage();
     }
 
     private void onActionExecuteBaseButton(ActionEvent ev) {
+        ToolModel.getInstance().genBaseSeedRandom();
         ToolModel.getInstance().executeBase();
         refleshFieldMapImage();
     }

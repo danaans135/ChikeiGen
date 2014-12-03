@@ -73,6 +73,7 @@ public class FieldMapBuilder {
     public void executeDesert() {
         desertField = initFieldMap2();
         // フィールド生成
+        initRandom(desertSeed);
         ToolModel model = ToolModel.getInstance();
         genField(desertField, model.getWoodRate(), desertShuffleCount, false, baseField);
 
@@ -83,6 +84,7 @@ public class FieldMapBuilder {
     public void executeMount() {
         mountField = initFieldMap2();
         // フィールド生成
+        initRandom(mountSeed);
         ToolModel model = ToolModel.getInstance();
         genField(mountField, model.getWoodRate(), mountShuffleCount, false, baseField);
 

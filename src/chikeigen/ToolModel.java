@@ -150,21 +150,33 @@ public class ToolModel {
 
     public void executeDesert() {
         mBuilder.setDesertShuffleCount(getDesertShuffleCount());
+        mBuilder.setDesertSeed(getDesertSeed());
         mBuilder.executeDesert();
     }
 
     public void executeMount() {
         mBuilder.setMountShuffleCount(getMountShuffleCount());
+        mBuilder.setMountSeed(getMountSeed());
         mBuilder.executeMount();
     }
 
     public void generateFieldMap() {
-        mBuilder.setFieldSize(getFieldWidth(), getFieldHeight());
-        mBuilder.setBaseShuffleCount(getBaseShuffleCount());
-        mBuilder.setWoodShuffleCount(getWoodShuffleCount());
-        mBuilder.setMountShuffleCount(getMountShuffleCount());
-        mBuilder.execute();
+//        mBuilder.setFieldSize(getFieldWidth(), getFieldHeight());
+//        mBuilder.setBaseShuffleCount(getBaseShuffleCount());
+//        mBuilder.setWoodShuffleCount(getWoodShuffleCount());
+//        mBuilder.setMountShuffleCount(getMountShuffleCount());
+//        mBuilder.execute();
 //        mBuilder.printFieldMap();
+
+        genBaseSeedRandom();
+        genWoodSeedRandom();
+        genDesertSeedRandom();
+        genMountSeedRandom();
+
+        executeBase();
+        executeWood();
+        executeDesert();
+        executeMount();
     }
 
     public Image getFieldMapImage() {
@@ -173,7 +185,20 @@ public class ToolModel {
         WritableImage fxImage = SwingFXUtils.toFXImage(img, null);
         return fxImage;
     }
+
     public void genBaseSeedRandom() {
         setBaseSeed((int)(Math.random() * Integer.MAX_VALUE));
+    }
+
+    public void genWoodSeedRandom() {
+        setWoodSeed((int)(Math.random() * Integer.MAX_VALUE));
+    }
+
+    public void genDesertSeedRandom() {
+        setDesertSeed((int)(Math.random() * Integer.MAX_VALUE));
+    }
+
+    public void genMountSeedRandom() {
+        setMountSeed((int)(Math.random() * Integer.MAX_VALUE));
     }
 }
