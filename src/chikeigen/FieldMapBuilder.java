@@ -97,8 +97,10 @@ public class FieldMapBuilder {
         for (int i = 1; i < mHeight-1; i++) {
             for (int j = 1; j < mWidth-1; j++) {
                 if (baseField[j][i] == 1) {
-                    if (altitude[j][i] > 4) {
-                        mFieldMapArrs[j][i] = 5;
+                    if (altitude[j][i] > 8) {
+                        mFieldMapArrs[j][i] = 6;
+                    } else if (altitude[j][i] > 4) {
+                            mFieldMapArrs[j][i] = 5;
                     } else {
                         mFieldMapArrs[j][i] = 1;
                     }
@@ -336,6 +338,7 @@ public class FieldMapBuilder {
                 case 3: c = Color.decode("#f0d090"); break;
                 case 4: c = Color.decode("#f0f090"); break;
                 case 5: c = Color.decode("#d8ffd8"); break;
+                case 6: c = Color.decode("#ffffd8"); break;
                 default:
                     break;
                 }

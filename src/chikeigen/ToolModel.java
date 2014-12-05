@@ -110,6 +110,8 @@ public class ToolModel {
     public void setDesertSeed(long desertSeed) { this.desertSeed.setValue(desertSeed); }
 
     private SimpleLongProperty mountSeed = new SimpleLongProperty();
+
+    private SampleMapBuilder mXx;
     public SimpleLongProperty mountSeedProperty() { return mountSeed; }
     public long getMountSeed() { return mountSeed.getValue(); }
     public void setMountSeed(long mountSeed) { this.mountSeed.setValue(mountSeed); }
@@ -132,6 +134,9 @@ public class ToolModel {
         setWoodSeed(1);
         setDesertSeed(2);
         setMountSeed(3);
+
+        mXx = new SampleMapBuilder();
+        mXx.execute();
     }
 
     public void executeBase() {
@@ -177,6 +182,9 @@ public class ToolModel {
         executeWood();
         executeDesert();
         executeMount();
+
+        //**
+        mXx.execute();
     }
 
     public Image getFieldMapImage() {
@@ -185,6 +193,13 @@ public class ToolModel {
         WritableImage fxImage = SwingFXUtils.toFXImage(img, null);
         return fxImage;
     }
+
+//    public Image getFieldMapImage() {
+//        BufferedImage img = mXx.getFieldMapImage2(getChipSize());
+////        BufferedImage img = ToolModel.getInstance().getFieldMapImage();
+//        WritableImage fxImage = SwingFXUtils.toFXImage(img, null);
+//        return fxImage;
+//    }
 
     public void genBaseSeedRandom() {
         setBaseSeed((int)(Math.random() * Integer.MAX_VALUE));
