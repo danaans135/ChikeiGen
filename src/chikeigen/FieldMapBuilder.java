@@ -20,6 +20,7 @@ public class FieldMapBuilder {
     private int[][] woodField;
     private int[][] desertField;
     private int[][] mountField;
+    private int[][] regionField;
     private int[][] altitude;
     private long baseSeed = 0;
 
@@ -89,6 +90,75 @@ public class FieldMapBuilder {
         genField(mountField, model.getWoodRate(), mountShuffleCount, false, baseField);
 
         composeFieldMap();
+
+    }
+
+    public void executeRegion() {
+        int[][] field =initFieldMap2();
+        int[][] dummy =initFieldMap2();
+        // フィールド生成
+        initRandom(-1);
+
+        int orgNum = 7;
+        for (int i = 0; i < orgNum; i++) {
+            while (true) {
+                int x = (int)(Math.random()*mWidth);
+                int y = (int)(Math.random()*mHeight);
+                if (baseField[x][y] == 1) {
+                    field[x][y] = i+1;
+                    break;
+                }
+            }
+        }
+
+//        int baseZeroCount = 0;
+//        for (int i = 1; i < mHeight-1; i++) {
+//            for (int j = 1; j < mWidth-1; j++) {
+//                if (baseField[j][i] == 0) {
+//                    baseZeroCount ++;
+//                }
+//            }
+//        }
+
+        boolean isFinished = false;
+        while (!isFinished) {
+//        for (int k = 0; k < 1000; k++) {
+            for (int i = 1; i < mHeight-1; i++) {
+                for (int j = 1; j < mWidth-1; j++) {
+                    if (field[j][i] != 0) {
+                        dummy[j][i] = field[j][i];
+                        if (field[j-1][i] == 0 && Math.random() < (baseField[j-1][i] == 1 ? 0.9 : 0.4)) dummy[j-1][i] = field[j][i];
+                        if (field[j][i-1] == 0 && Math.random() < (baseField[j][i-1] == 1 ? 0.9 : 0.4)) dummy[j][i-1] = field[j][i];
+                        if (field[j+1][i] == 0 && Math.random() < (baseField[j+1][i] == 1 ? 0.9 : 0.4)) dummy[j+1][i] = field[j][i];
+                        if (field[j][i+1] == 0 && Math.random() < (baseField[j][i+1] == 1 ? 0.9 : 0.4)) dummy[j][i+1] = field[j][i];
+                    }
+                }
+            }
+            for (int i = 1; i < mHeight-1; i++) {
+                for (int j = 1; j < mWidth-1; j++) {
+                    field[j][i] = dummy[j][i];
+                }
+            }
+            int zeroCount = 0;
+            for (int i = 1; i < mHeight-1; i++) {
+                for (int j = 1; j < mWidth-1; j++) {
+                    if (field[j][i] == 0) {
+                        zeroCount ++;
+                    }
+                }
+            }
+            if (zeroCount == 0) isFinished = true;
+        }
+        regionField = field;
+
+        //フィールド合成　平地、森
+        for (int i = 1; i < mHeight-1; i++) {
+            for (int j = 1; j < mWidth-1; j++) {
+                if (baseField[j][i] == 0) {
+                    regionField[j][i] = 0;
+                }
+            }
+        }
 
     }
 
@@ -339,6 +409,33 @@ public class FieldMapBuilder {
                 case 4: c = Color.decode("#f0f090"); break;
                 case 5: c = Color.decode("#d8ffd8"); break;
                 case 6: c = Color.decode("#ffffd8"); break;
+                default:
+                    break;
+                }
+                g2.setPaint(c);
+                g2.fillRect(j * chipSize, i * chipSize, chipSize, chipSize);
+            }
+        }
+
+        return img;
+    }
+
+    public BufferedImage getFieldMapImage3(int chipSize) {
+        BufferedImage img = new BufferedImage(mWidth * chipSize, mHeight * chipSize, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = img.createGraphics();
+
+        for (int i = 0; i < mHeight; i++) {
+            for (int j = 0; j < mWidth; j++) {
+                Color c = Color.black;
+                switch (regionField[j][i]) {
+                case 0: c = Color.decode("#9090a0"); break;
+                case 1: c = Color.decode("#c0ffc0"); break;
+                case 2: c = Color.decode("#90f090"); break;
+                case 3: c = Color.decode("#f0d090"); break;
+                case 4: c = Color.decode("#f0f090"); break;
+                case 5: c = Color.decode("#d8ffd8"); break;
+                case 6: c = Color.decode("#ffffd8"); break;
+                case 7: c = Color.decode("#ff90d8"); break;
                 default:
                     break;
                 }

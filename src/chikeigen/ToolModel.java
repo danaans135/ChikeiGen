@@ -120,7 +120,7 @@ public class ToolModel {
         mBuilder = new FieldMapBuilder();
         setTitle(TITLE);
 //        setCount(DEFAULT_COUNT);
-        setFieldMapOpacity(0.4);
+        setFieldMapOpacity(0.3);
         setFieldWidth(DEFAULT_FIELD_WIDTH);
         setFieldHeight(DEFAULT_FIELD_HEIGHT);
         setBaseRate(DEFAULT_BASE_RATE);
@@ -185,6 +185,7 @@ public class ToolModel {
 
         //**
         mXx.execute();
+        mBuilder.executeRegion();
     }
 
     public Image getFieldMapImage() {
@@ -195,7 +196,7 @@ public class ToolModel {
     }
 
 //    public Image getFieldMapImage() {
-//        BufferedImage img = mXx.getFieldMapImage2(getChipSize());
+//        BufferedImage img = mBuilder.getFieldMapImage3(getChipSize());
 ////        BufferedImage img = ToolModel.getInstance().getFieldMapImage();
 //        WritableImage fxImage = SwingFXUtils.toFXImage(img, null);
 //        return fxImage;
