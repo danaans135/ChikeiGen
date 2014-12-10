@@ -17,7 +17,12 @@
          <items>
             <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="241.0" prefViewportHeight="204.0" prefViewportWidth="214.0" prefWidth="229.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="14.0">
                <content>
-                  <ImageView fx:id="imageView" fitHeight="204.0" fitWidth="214.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" smooth="false" />
+                  <StackPane>
+                     <children>
+                        <ImageView fx:id="imageView" fitHeight="204.0" fitWidth="214.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" smooth="false" />
+                        <ImageView fx:id="imageView2" fitHeight="204.0" fitWidth="214.0" pickOnBounds="true" smooth="false" />
+                     </children>
+                  </StackPane>
                </content>
             </ScrollPane>
             <ScrollPane prefHeight="241.0" prefViewportHeight="288.0" prefViewportWidth="174.0">
@@ -43,6 +48,21 @@
                                  </VBox.margin>
                               </Slider>
                               <TextField fx:id="alphaTextField" prefWidth="40.0" />
+                           </children>
+                        </HBox>
+                        <Label text="透過率2">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Slider fx:id="alpha2Slider" max="1.0" prefHeight="14.0" prefWidth="120.0">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Slider>
+                              <TextField fx:id="alpha2TextField" prefWidth="40.0" />
                            </children>
                         </HBox>
                         <Separator prefWidth="200.0">

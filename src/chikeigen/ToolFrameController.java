@@ -49,6 +49,9 @@ public class ToolFrameController {
     private TextField chipSizeTextField;
 
     @FXML
+    private Slider alpha2Slider;
+
+    @FXML
     private Button desertSeedRandomButton;
 
     @FXML
@@ -62,6 +65,9 @@ public class ToolFrameController {
 
     @FXML
     private TextField fieldHeightTextField;
+
+    @FXML
+    private ImageView imageView2;
 
     @FXML
     private Button genButton;
@@ -87,6 +93,8 @@ public class ToolFrameController {
     @FXML
     private TextField mountShuffleCountTextField;
 
+    @FXML
+    private TextField alpha2TextField;
 
     @FXML
     void initialize() {
@@ -107,6 +115,9 @@ public class ToolFrameController {
         Bindings.bindBidirectional(alphaSlider.valueProperty(), toolModel.fieldMapOpacityProperty());
         Bindings.bindBidirectional(alphaTextField.textProperty(), toolModel.fieldMapOpacityProperty(), new NumberStringConverter());
         imageView.opacityProperty().bind(toolModel.fieldMapOpacityProperty());
+        Bindings.bindBidirectional(alpha2Slider.valueProperty(), toolModel.regionMapOpacityProperty());
+        Bindings.bindBidirectional(alpha2TextField.textProperty(), toolModel.regionMapOpacityProperty(), new NumberStringConverter());
+        imageView2.opacityProperty().bind(toolModel.regionMapOpacityProperty());
         Bindings.bindBidirectional(fieldWidthTextField.textProperty(), toolModel.fieldWidthProperty(),
                 new NumberStringConverter());
         Bindings.bindBidirectional(fieldHeightTextField.textProperty(), toolModel.fieldHeightProperty(),
@@ -196,6 +207,11 @@ public class ToolFrameController {
         imageView.setImage(fxImage);
         imageView.setFitWidth(fxImage.getWidth());
         imageView.setFitHeight(fxImage.getHeight());
+
+        Image fxImage2 = ToolModel.getInstance().getRegionMapImage();
+        imageView2.setImage(fxImage2);
+        imageView2.setFitWidth(fxImage2.getWidth());
+        imageView2.setFitHeight(fxImage2.getHeight());
     }
 
 }

@@ -110,17 +110,23 @@ public class ToolModel {
     public void setDesertSeed(long desertSeed) { this.desertSeed.setValue(desertSeed); }
 
     private SimpleLongProperty mountSeed = new SimpleLongProperty();
-
-    private SampleMapBuilder mXx;
     public SimpleLongProperty mountSeedProperty() { return mountSeed; }
     public long getMountSeed() { return mountSeed.getValue(); }
     public void setMountSeed(long mountSeed) { this.mountSeed.setValue(mountSeed); }
+
+    private SimpleDoubleProperty regionMapOpacity = new SimpleDoubleProperty();
+    public SimpleDoubleProperty regionMapOpacityProperty() { return regionMapOpacity; }
+    public double getRegionMapOpacity() { return regionMapOpacity.getValue(); }
+    public void setRegionMapOpacity(double regionMapOpacity) { this.regionMapOpacity.setValue(regionMapOpacity); }
+
+    private SampleMapBuilder mXx;
 
     private ToolModel() {
         mBuilder = new FieldMapBuilder();
         setTitle(TITLE);
 //        setCount(DEFAULT_COUNT);
         setFieldMapOpacity(0.3);
+        setRegionMapOpacity(0.3);
         setFieldWidth(DEFAULT_FIELD_WIDTH);
         setFieldHeight(DEFAULT_FIELD_HEIGHT);
         setBaseRate(DEFAULT_BASE_RATE);
@@ -216,5 +222,11 @@ public class ToolModel {
 
     public void genMountSeedRandom() {
         setMountSeed((int)(Math.random() * Integer.MAX_VALUE));
+    }
+    public Image getRegionMapImage() {
+        BufferedImage img = mBuilder.getFieldMapImage3(getChipSize());
+        //    BufferedImage img = ToolModel.getInstance().getFieldMapImage();
+        WritableImage fxImage = SwingFXUtils.toFXImage(img, null);
+        return fxImage;
     }
 }

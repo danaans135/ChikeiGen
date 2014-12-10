@@ -34,6 +34,7 @@ public class CodingAssistUtil {
         outProp("woodSeed", "long");
         outProp("desertSeed", "long");
         outProp("mountSeed", "long");
+        outProp("regionMapOpacity", "double");
 
 //        System.out.println("----------------------");
 //        System.out.println("public class Builder {");
@@ -81,8 +82,8 @@ public class CodingAssistUtil {
     }
 
     private static void outProp(String prop, String jtype) {
-//        outProp(prop, getPropType(jtype), jtype);
-        outNormalProp(prop, jtype);
+        outProp(prop, getPropType(jtype), jtype);
+//        outNormalProp(prop, jtype);
     }
 
     private static String getPropType(String jtype) {
